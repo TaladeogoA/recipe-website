@@ -1,4 +1,4 @@
-import { Container } from "@/components/layouts/container";
+import { Container } from "@/components/layouts";
 import { RecipeCard } from "@/components/recipes/recipe-card";
 
 const RecipesPage = () => {
