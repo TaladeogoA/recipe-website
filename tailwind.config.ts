@@ -24,6 +24,9 @@ export default {
       "2xl": "1536px", // Extra large screens
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-dm-sans)", "sans-serif"],
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
