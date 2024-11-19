@@ -1,6 +1,7 @@
 "use client";
 import LogoImg from "@/assets/images/brand/logo.jpg";
 import Image from "next/image";
+import Link from "next/link";
 import { useState } from "react";
 import { Text } from "../custom-ui/text";
 
@@ -14,8 +15,8 @@ const Navbar = () => {
       <div className="flex items-center justify-between">
         {/* Left group - Logo and Desktop Menu */}
         <div className="flex items-center gap-8">
-          <a
-            href="#"
+          <Link
+            href="/"
             className="text-2xl font-bold text-gray-800 flex items-center gap-2"
           >
             <Image
@@ -26,24 +27,27 @@ const Navbar = () => {
               className="object-cover"
             />
             TastyQ
-          </a>
+          </Link>
 
           {/* Desktop Menu */}
           <ul className="hidden md:flex gap-8">
             <li>
-              <a href="#" className="text-gray-800 hover:text-primary">
+              <Link href="/" className="text-gray-800 hover:text-primary">
                 <Text>home</Text>
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="text-gray-800 hover:text-primary">
+              <Link href="/about" className="text-gray-800 hover:text-primary">
                 <Text>about</Text>
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="text-gray-800 hover:text-primary">
+              <Link
+                href="/recipes"
+                className="text-gray-800 hover:text-primary"
+              >
                 <Text>recipes</Text>
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
@@ -158,28 +162,31 @@ const Navbar = () => {
           {/* Mobile menu items */}
           <ul className="flex flex-col gap-4 pb-4">
             <li>
-              <a
-                href="#"
+              <Link
+                href="/"
                 className="text-gray-800 hover:text-primary block py-2"
+                onClick={() => setIsMenuOpen(false)}
               >
                 home
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                href="/about"
                 className="text-gray-800 hover:text-primary block py-2"
+                onClick={() => setIsMenuOpen(false)}
               >
                 about
-              </a>
+              </Link>
             </li>
             <li>
-              <a
-                href="#"
+              <Link
+                href="/recipes"
                 className="text-gray-800 hover:text-primary block py-2"
+                onClick={() => setIsMenuOpen(false)}
               >
                 recipes
-              </a>
+              </Link>
             </li>
           </ul>
         </div>
