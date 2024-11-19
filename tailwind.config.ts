@@ -16,18 +16,26 @@ export default {
       },
     },
     screens: {
-      // Your breakpoints here - these are common values but adjust based on your design
-      sm: "640px", // Small tablets and large phones
-      md: "768px", // Tablets
-      lg: "1024px", // Desktop
-      xl: "1280px", // Large desktop
-      "2xl": "1536px", // Extra large screens
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
     },
     extend: {
       fontFamily: {
         sans: ["var(--font-dm-sans)", "sans-serif"],
       },
       colors: {
+        brand: {
+          primary: "#81d489",
+          light: "#f4faf6",
+        },
+        grey: {
+          200: "#fafafa",
+          500: "#dcdcdc",
+          800: "#1f2937",
+        },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
@@ -73,6 +81,9 @@ export default {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      boxShadow: {
+        recipe: "0px 7px 10px 0px rgba(220,220,220,0.5)",
       },
     },
   },

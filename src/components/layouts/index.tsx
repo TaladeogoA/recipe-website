@@ -67,15 +67,7 @@ export const Container = ({
   ...props
 }: ContainerProps) => {
   return (
-    <div
-      className={cn(
-        "w-full px-4",
-        "md:px-6",
-        "lg:px-8 lg:max-w-7xl mx-auto",
-        className
-      )}
-      {...props}
-    >
+    <div className={cn("w-full lg:max-w-7xl mx-auto", className)} {...props}>
       {children}
     </div>
   );
@@ -91,7 +83,7 @@ export const Page = ({
     <main
       className={cn(
         "min-h-screen flex flex-col",
-        !fullWidth && "max-w-7xl mx-auto",
+        !fullWidth && "max-w-screen-2xl mx-auto",
         className
       )}
       {...props}
@@ -104,33 +96,18 @@ export const Page = ({
 export const Section = ({
   children,
   bgColor = "white",
-  direction,
   className,
   ...props
-}: SectionProps) => {
+}: Omit<SectionProps, "direction">) => {
   const bgColors = {
     white: "bg-white",
     gray: "bg-gray-50",
     primary: "bg-primary/5",
   };
 
-  const flexDirections: Record<string, string> = {
-    row: "flex-row",
-    col: "flex-col",
-  };
-
   return (
     <section
-      className={cn(
-        "py-12 md:py-16 lg:py-20",
-        bgColors[bgColor],
-        "flex flex-col sm:flex-row",
-        direction?.default && flexDirections[direction.default],
-        direction?.sm && `sm:${flexDirections[direction.sm]}`,
-        direction?.md && `md:${flexDirections[direction.md]}`,
-        direction?.lg && `lg:${flexDirections[direction.lg]}`,
-        className
-      )}
+      className={cn("py-12 md:py-16 lg:py-20", bgColors[bgColor], className)}
       {...props}
     >
       {children}
