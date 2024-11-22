@@ -7,6 +7,7 @@ import { PrimaryButton } from "@/components/custom-ui/primary-button";
 import { SecondaryButton } from "@/components/custom-ui/secondary-button";
 import { Text } from "@/components/custom-ui/text";
 import { AspectBox, Flex, Page } from "@/components/layouts";
+import { RecipeCard } from "@/components/recipes/recipe-card";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import { GiCakeSlice, GiCook, GiHeartPlus, GiStopwatch } from "react-icons/gi";
@@ -122,6 +123,26 @@ export default function Home() {
                 </Text>
                 <Text className="text-gray-600">{category.description}</Text>
               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full py-16 md:py-20">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-12">
+            <Text variant="h2">Browse Our Latest Recipes</Text>
+            <SecondaryButton>Browse All Recipes</SecondaryButton>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {[...Array(6)].map((_, i) => (
+              <RecipeCard
+                key={i}
+                title="Creamy Garlic Parmesan Pasta"
+                description="A rich and creamy pasta dish made with fresh garlic, parmesan cheese, and herbs."
+                tag="main course"
+              />
             ))}
           </div>
         </div>
