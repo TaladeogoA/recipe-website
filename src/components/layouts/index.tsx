@@ -37,15 +37,7 @@ type GridColumn = 1 | 2 | 3 | 4 | 6;
 interface FlexContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
   direction?: "row" | "col";
-  align?: "start" | "center" | "end";
-  justify?: "start" | "center" | "end" | "between";
-  gap?: "small" | "medium" | "large";
-}
-
-interface FlexContainerProps extends React.HTMLAttributes<HTMLDivElement> {
-  children: React.ReactNode;
-  direction?: "row" | "col";
-  align?: "start" | "center" | "end";
+  align?: "start" | "center" | "end" | "stretch";
   justify?: "start" | "center" | "end" | "between";
   gap?: "small" | "medium" | "large";
 }
@@ -57,7 +49,20 @@ interface StackProps extends React.HTMLAttributes<HTMLDivElement> {
 
 interface AspectBoxProps extends React.HTMLAttributes<HTMLDivElement> {
   children: React.ReactNode;
-  ratio?: "square" | "video" | "portrait" | "wide" | number;
+  ratio?:
+    | "square"
+    | "video"
+    | "portrait"
+    | "wide"
+    | "ultrawide"
+    | "cinema"
+    | "classic"
+    | "instagram"
+    | "story"
+    | "pinterest"
+    | "landscape"
+    | "panorama"
+    | number;
   className?: string;
 }
 
@@ -178,6 +183,7 @@ export const Flex = ({
     start: "items-start",
     center: "items-center",
     end: "items-end",
+    stretch: "items-stretch",
   };
 
   const justifications = {
@@ -234,6 +240,14 @@ export const AspectBox = ({
     video: "aspect-[16/9]",
     portrait: "aspect-[3/4]",
     wide: "aspect-[21/9]",
+    ultrawide: "aspect-[32/9]",
+    cinema: "aspect-[2.35/1]",
+    classic: "aspect-[4/3]",
+    instagram: "aspect-[4/5]",
+    story: "aspect-[9/16]",
+    pinterest: "aspect-[2/3]",
+    landscape: "aspect-[3/2.5]",
+    panorama: "aspect-[7/2]",
   };
 
   const aspectRatio =
