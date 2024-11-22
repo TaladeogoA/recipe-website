@@ -1,4 +1,5 @@
 "use client";
+import ChefImg from "@/assets/images/chef.jpg";
 import HeroFour from "@/assets/images/hero-four.webp";
 import HeroOne from "@/assets/images/hero-one.jpg";
 import HeroThree from "@/assets/images/hero-three.jpg";
@@ -10,7 +11,22 @@ import { AspectBox, Flex, Page } from "@/components/layouts";
 import { RecipeCard } from "@/components/recipes/recipe-card";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
-import { GiCakeSlice, GiCook, GiHeartPlus, GiStopwatch } from "react-icons/gi";
+import Link from "next/link";
+import {
+  FaAward,
+  FaFacebook,
+  FaInstagram,
+  FaTwitter,
+  FaUser,
+  FaYoutube,
+} from "react-icons/fa";
+import {
+  GiCakeSlice,
+  GiCook,
+  GiHeartPlus,
+  GiOpenBook,
+  GiStopwatch,
+} from "react-icons/gi";
 
 export default function Home() {
   const { scrollYProgress } = useScroll();
@@ -44,7 +60,7 @@ export default function Home() {
   return (
     <Page>
       <Flex
-        className="w-full min-h-screen h-full flex-col md:flex-row"
+        className="w-full min-h-screen h-full flex-col md:flex-row bg-white"
         align="stretch"
       >
         <div className="w-full md:w-[45%] px-6 md:px-14 flex flex-col pb-10 md:pb-30 mt-16 md:mt-[18%]">
@@ -102,7 +118,7 @@ export default function Home() {
         <div className="absolute right-0 top-0 w-1/2 h-screen -z-10 bg-brand-light md:block hidden"></div>
       </Flex>
 
-      <section className="w-full pt-10 pb-20">
+      <section className="w-full pt-10 pb-20 mt-20">
         <div className="container mx-auto px-6">
           <Text variant="h2" className="text-center mb-12">
             Browse by Category
@@ -147,6 +163,116 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <section className="w-full bg-grey-100 py-20">
+        <div className="container mx-auto px-6">
+          <div className="flex flex-col md:flex-row gap-10">
+            {/* Left Container - Image & Overlay */}
+            <div className="w-full md:w-[60%] relative">
+              <AspectBox ratio="portrait" className="relative w-full">
+                <Image
+                  src={ChefImg}
+                  alt="Sarah Mitchell"
+                  fill
+                  className="object-cover"
+                />
+              </AspectBox>
+
+              <div className="md:w-[80%] bg-white p-8 md:p-10 md:absolute md:bottom-10 md:right-0 md:-translate-x-10">
+                <Text variant="h2" className="mb-2">
+                  Sarah Mitchell
+                </Text>
+                <Text className="text-gray-600 mb-6">
+                  Chef, Food Vlogger & Entrepreneur
+                </Text>
+
+                <Flex className="items-center">
+                  <Link
+                    href="#"
+                    className="w-10 h-10 rounded-full bg-black flex items-center justify-center"
+                  >
+                    <FaInstagram className="w-5 h-5 text-white" />
+                  </Link>
+                  <Link
+                    href="#"
+                    className="w-10 h-10 rounded-full bg-black flex items-center justify-center"
+                  >
+                    <FaYoutube className="w-5 h-5 text-white" />
+                  </Link>
+                  <Link
+                    href="#"
+                    className="w-10 h-10 rounded-full bg-black flex items-center justify-center"
+                  >
+                    <FaTwitter className="w-5 h-5 text-white" />
+                  </Link>
+                  <Link
+                    href="#"
+                    className="w-10 h-10 rounded-full bg-black flex items-center justify-center"
+                  >
+                    <FaFacebook className="w-5 h-5 text-white" />
+                  </Link>
+                  <Link
+                    href="#"
+                    className="w-10 h-10 rounded-full bg-black flex items-center justify-center"
+                  >
+                    <FaTwitter className="w-5 h-5 text-white" />
+                  </Link>
+                </Flex>
+              </div>
+            </div>
+
+            {/* Right Container - About Info */}
+            <div className="w-full md:w-[40%] flex flex-col justify-center">
+              <Text variant="h2" className="mb-4">
+                About Sarah Mitchell
+              </Text>
+              <Text className="text-gray-600 mb-8">
+                Passionate about making cooking accessible and enjoyable for
+                everyone. With over 10 years of culinary experience, I share
+                recipes that bring joy to your kitchen.
+              </Text>
+
+              <div className="space-y-6 mb-10">
+                <Flex gap="medium" className="items-center">
+                  <div className="w-12 h-12 rounded-full bg-brand-primary flex items-center justify-center">
+                    <GiOpenBook className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <Text className="font-bold">400+ Recipes</Text>
+                    <Text className="text-gray-600">Published Online</Text>
+                  </div>
+                </Flex>
+
+                <Flex gap="medium" className="items-center">
+                  <div className="w-12 h-12 rounded-full bg-brand-primary flex items-center justify-center">
+                    <FaUser className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <Text className="font-bold">1.2M+ Followers</Text>
+                    <Text className="text-gray-600">Across Social Media</Text>
+                  </div>
+                </Flex>
+
+                <Flex gap="medium" className="items-center">
+                  <div className="w-12 h-12 rounded-full bg-brand-primary flex items-center justify-center">
+                    <FaAward className="w-6 h-6 text-white" />
+                  </div>
+                  <div>
+                    <Text className="font-bold">15+ Awards</Text>
+                    <Text className="text-gray-600">
+                      For Culinary Excellence
+                    </Text>
+                  </div>
+                </Flex>
+              </div>
+
+              <PrimaryButton>More About Sarah</PrimaryButton>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* follow my journey */}
     </Page>
   );
 }

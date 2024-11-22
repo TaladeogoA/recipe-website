@@ -39,7 +39,7 @@ export function RecipeCard({ title, description, tag }: RecipeCardProps) {
           {title}
         </Text>
         <Text variant="body">{description}</Text>
-        <div className="h-[2px] bg-grey-500 mt-14 md:mt-10 xl:mt-20" />
+        <div className="h-[2px] bg-grey-500 mt-14 md:mt-10 xl:mt-12" />
         <Flex className="mt-6">
           <Flex gap="small">
             <Image src={ServingSrc} alt="" />
