@@ -14,13 +14,14 @@ const Footer = () => {
                 src={LogoImg}
                 height={50}
                 width={50}
-                alt="TastyQ"
+                alt="Gather"
                 className="object-cover"
               />
-              <span className="text-2xl font-bold text-gray-800">TastyQ</span>
+              <span className="text-2xl font-bold text-gray-800">Gather</span>
             </div>
             <Text variant="body" className="text-gray-600">
-              Discover, create and share delicious recipes from around the world
+              Discover, create and share delicious recipes from around the
+              world!
             </Text>
           </div>
 

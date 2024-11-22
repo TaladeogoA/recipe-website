@@ -49,11 +49,11 @@ export default function Home() {
         <div className="w-full md:w-[45%] px-6 md:px-14 flex flex-col pb-10 md:pb-30 mt-16 md:mt-[18%]">
           <div className="h-[2px] bg-brand-primary w-32 mb-8 md:mb-12" />
           <Text variant="h1" className="mb-4">
-            Discover Amazing Recipes for Every Occasion
+            A Kitchen Where Stories Come to Life
           </Text>
           <Text className="mb-6 md:mb-10">
-            Lorem ipsum dolor sit amet consectetur adipiscing elit sed do
-            eiusmod tempor incididunt ut.
+            From our kitchen to yours - explore, create and share mouthwatering
+            recipes that bring people together.
           </Text>
           <div className="flex gap-4">
             <PrimaryButton>discover recipes</PrimaryButton>

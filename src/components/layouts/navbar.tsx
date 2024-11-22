@@ -23,10 +23,10 @@ const Navbar = () => {
               src={LogoImg}
               height={50}
               width={50}
-              alt="TastyQ"
+              alt="Gather"
               className="object-cover"
             />
-            TastyQ
+            Gather
           </Link>
 
           {/* Desktop Menu */}
