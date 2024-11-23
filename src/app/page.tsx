@@ -123,7 +123,7 @@ export default function Home() {
         <div className="absolute right-0 top-0 w-1/2 h-screen -z-10 bg-brand-light md:block hidden"></div>
       </Flex>
 
-      <section className="w-full pt-10 pb-20 mt-20">
+      <section className="w-full pt-10 pb-20 mt-10 lg:mt-0 px-0 lg:px-10">
         <div className="container mx-auto px-6">
           <Text variant="h2" className="text-center mb-12">
             Browse by Category
@@ -149,7 +149,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full py-16 md:py-20">
+      <section className="w-full py-16 md:py-20 px-0 lg:px-10">
         <div className="container mx-auto px-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-12">
             <Text variant="h2">Browse Our Latest Recipes</Text>
@@ -169,7 +169,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full bg-grey-100 py-20">
+      <section className="w-full bg-grey-100 py-20 px-0 lg:px-10">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row gap-10">
             {/* Left Container - Image & Overlay */}
