@@ -4,6 +4,11 @@ import HeroFour from "@/assets/images/hero-four.webp";
 import HeroOne from "@/assets/images/hero-one.jpg";
 import HeroThree from "@/assets/images/hero-three.jpg";
 import HeroTwo from "@/assets/images/hero-two.jpg";
+import InstaFive from "@/assets/images/insta-five.jpg";
+import InstaFour from "@/assets/images/insta-four.jpg";
+import InstaOne from "@/assets/images/insta-one.jpg";
+import InstaThree from "@/assets/images/insta-three.jpg";
+import InstaTwo from "@/assets/images/insta-two.jpg";
 import { PrimaryButton } from "@/components/custom-ui/primary-button";
 import { SecondaryButton } from "@/components/custom-ui/secondary-button";
 import { Text } from "@/components/custom-ui/text";
@@ -272,7 +277,72 @@ export default function Home() {
         </div>
       </section>
 
-      {/* follow my journey */}
+      <section className="w-full py-16 px-0 lg:px-10 md:py-20">
+        <div className="container mx-auto">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-12">
+            <Text variant="h2">Follow my journey on Instagram</Text>
+            <SecondaryButton>Follow Me</SecondaryButton>
+          </div>
+
+          <div className="flex flex-wrap gap-4 justify-center">
+            <AspectBox
+              ratio="square"
+              className="w-[calc(50%-8px)] sm:w-40 xl:w-56"
+            >
+              <Image
+                src={InstaOne}
+                alt="Instagram post 1"
+                fill
+                className="object-cover"
+              />
+            </AspectBox>
+            <AspectBox
+              ratio="square"
+              className="w-[calc(50%-8px)] sm:w-40 xl:w-56"
+            >
+              <Image
+                src={InstaTwo}
+                alt="Instagram post 2"
+                fill
+                className="object-cover"
+              />
+            </AspectBox>
+            <AspectBox
+              ratio="square"
+              className="w-[calc(50%-8px)] sm:w-40 xl:w-56"
+            >
+              <Image
+                src={InstaThree}
+                alt="Instagram post 3"
+                fill
+                className="object-cover"
+              />
+            </AspectBox>
+            <AspectBox
+              ratio="square"
+              className="w-[calc(50%-8px)] sm:w-40 xl:w-56"
+            >
+              <Image
+                src={InstaFour}
+                alt="Instagram post 4"
+                fill
+                className="object-cover"
+              />
+            </AspectBox>
+            <AspectBox
+              ratio="square"
+              className="w-[calc(50%-8px)] sm:w-40 xl:w-56 hidden sm:block"
+            >
+              <Image
+                src={InstaFive}
+                alt="Instagram post 5"
+                fill
+                className="object-cover"
+              />
+            </AspectBox>
+          </div>
+        </div>
+      </section>
     </Page>
   );
 }
