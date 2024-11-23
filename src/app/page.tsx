@@ -13,12 +13,16 @@ import { PrimaryButton } from "@/components/custom-ui/primary-button";
 import { SecondaryButton } from "@/components/custom-ui/secondary-button";
 import { Text } from "@/components/custom-ui/text";
 import { AspectBox, Flex, Page } from "@/components/layouts";
+import { FeaturedRecipeCard } from "@/components/recipes/featured-recipe-card";
 import { RecipeCard } from "@/components/recipes/recipe-card";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 import {
   FaAward,
+  FaChevronLeft,
+  FaChevronRight,
   FaFacebook,
   FaInstagram,
   FaTwitter,
@@ -32,8 +36,12 @@ import {
   GiOpenBook,
   GiStopwatch,
 } from "react-icons/gi";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick-theme.css";
+import "slick-carousel/slick/slick.css";
 
 export default function Home() {
+  const [slider, setSlider] = useState<Slider | null>(null);
   const { scrollYProgress } = useScroll();
 
   const y1 = useTransform(scrollYProgress, [0, 1], ["10px", "-30%"]);
@@ -150,9 +158,108 @@ export default function Home() {
       </section>
 
       <section className="w-full py-16 md:py-20 px-0 lg:px-10">
+        <div className="container mx-auto">
+          {/* Header - Desktop/Tablet */}
+          <div className="hidden sm:flex sm:flex-row sm:items-center sm:justify-between gap-4 mb-12">
+            <Text variant="h2">Browse our featured recipes</Text>
+            <div className="flex gap-4">
+              <SecondaryButton onClick={() => slider?.slickPrev()}>
+                <FaChevronLeft />
+              </SecondaryButton>
+              <SecondaryButton onClick={() => slider?.slickNext()}>
+                <FaChevronRight />
+              </SecondaryButton>
+            </div>
+          </div>
+
+          {/* Header - Mobile */}
+          <div className="sm:hidden text-center mb-8">
+            <Text variant="h2" className="mb-6">
+              Browse our featured recipes
+            </Text>
+          </div>
+
+          {/* Slick Carousel */}
+          <div className="relative">
+            <Slider
+              ref={(c) => setSlider(c)}
+              infinite={true}
+              speed={500}
+              slidesToShow={2.1}
+              slidesToScroll={1}
+              arrows={false}
+              responsive={[
+                {
+                  breakpoint: 768,
+                  settings: {
+                    slidesToShow: 1.5,
+                    slidesToScroll: 1,
+                    centerMode: true,
+                    centerPadding: "40px",
+                  },
+                },
+                {
+                  breakpoint: 480,
+                  settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                  },
+                },
+              ]}
+            >
+              <div className="px-3">
+                <FeaturedRecipeCard
+                  title="Creamy Garlic Parmesan Pasta"
+                  description="A rich and creamy pasta dish made with fresh garlic, parmesan cheese, and herbs."
+                  tag="main course"
+                />
+              </div>
+              <div className="px-3">
+                <FeaturedRecipeCard
+                  title="Spicy Thai Basil Chicken"
+                  description="A flavorful stir-fry with Thai basil, chilies, and aromatic sauce."
+                  tag="main course"
+                />
+              </div>
+              <div className="px-3">
+                <FeaturedRecipeCard
+                  title="Mediterranean Quinoa Bowl"
+                  description="Fresh and healthy bowl with quinoa, vegetables, and feta cheese."
+                  tag="healthy"
+                />
+              </div>
+              <div className="px-3">
+                <FeaturedRecipeCard
+                  title="Classic Chocolate Brownies"
+                  description="Rich and fudgy brownies with a perfect crackly top."
+                  tag="dessert"
+                />
+              </div>
+            </Slider>
+
+            {/* Mobile Navigation */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[150%] flex gap-56 sm:hidden z-10">
+              <button
+                onClick={() => slider?.slickPrev()}
+                className="p-3 bg-black hover:bg-brand-primary transition-colors duration-200 w-12 h-12 flex items-center justify-center"
+              >
+                <FaChevronLeft className="w-5 h-5 text-white transition-colors duration-200 hover:text-black" />
+              </button>
+              <button
+                onClick={() => slider?.slickNext()}
+                className="p-3 bg-black hover:bg-brand-primary transition-colors duration-200 w-12 h-12 flex items-center justify-center"
+              >
+                <FaChevronRight className="w-5 h-5 text-white transition-colors duration-200 hover:text-black" />
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="w-full py-16 md:py-20 px-0 lg:px-10">
         <div className="container mx-auto px-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-12">
-            <Text variant="h2">Browse Our Latest Recipes</Text>
+            <Text variant="h2">Browse our latest recipes</Text>
             <SecondaryButton>Browse All Recipes</SecondaryButton>
           </div>
 
