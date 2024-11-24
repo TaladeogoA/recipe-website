@@ -39,7 +39,7 @@ interface FlexContainerProps extends React.HTMLAttributes<HTMLDivElement> {
   direction?: "row" | "col";
   align?: "start" | "center" | "end" | "stretch";
   justify?: "start" | "center" | "end" | "between";
-  gap?: "small" | "medium" | "large";
+  gap?: "x-small" | "small" | "medium" | "large";
 }
 
 interface StackProps extends React.HTMLAttributes<HTMLDivElement> {
@@ -169,6 +169,7 @@ export const Flex = ({
   ...props
 }: FlexContainerProps) => {
   const gaps = {
+    "x-small": "gap-2",
     small: "gap-4",
     medium: "gap-6",
     large: "gap-8",

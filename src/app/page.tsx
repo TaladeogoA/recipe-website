@@ -220,32 +220,44 @@ export default function Home() {
                 },
               ]}
             >
-              <div className="px-3">
+              <div className="md:px-3">
                 <FeaturedRecipeCard
                   title="Creamy Garlic Parmesan Pasta"
                   description="A rich and creamy pasta dish made with fresh garlic, parmesan cheese, and herbs."
                   tag="main course"
+                  prepTime={45}
+                  serving={6}
+                  difficulty="easy"
                 />
               </div>
-              <div className="px-3">
+              <div className="md:px-3">
                 <FeaturedRecipeCard
                   title="Spicy Thai Basil Chicken"
                   description="A flavorful stir-fry with Thai basil, chilies, and aromatic sauce."
                   tag="main course"
+                  prepTime={45}
+                  serving={6}
+                  difficulty="easy"
                 />
               </div>
-              <div className="px-3">
+              <div className="md:px-3">
                 <FeaturedRecipeCard
                   title="Mediterranean Quinoa Bowl"
                   description="Fresh and healthy bowl with quinoa, vegetables, and feta cheese."
                   tag="healthy"
+                  prepTime={45}
+                  serving={6}
+                  difficulty="easy"
                 />
               </div>
-              <div className="px-3">
+              <div className="md:px-3">
                 <FeaturedRecipeCard
                   title="Classic Chocolate Brownies"
                   description="Rich and fudgy brownies with a perfect crackly top."
                   tag="dessert"
+                  prepTime={45}
+                  serving={6}
+                  difficulty="easy"
                 />
               </div>
             </Slider>
@@ -278,13 +290,16 @@ export default function Home() {
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
             {[...Array(6)].map((_, i) => (
               <RecipeCard
                 key={i}
                 title="Creamy Garlic Parmesan Pasta"
                 description="A rich and creamy pasta dish made with fresh garlic, parmesan cheese, and herbs."
                 tag="main course"
+                serving={6}
+                prepTime={60}
+                difficulty="easy"
               />
             ))}
           </div>

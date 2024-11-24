@@ -1,5 +1,6 @@
-import PrepSrc from "@/assets/icons/prep-time.svg";
-import ServingSrc from "@/assets/icons/servings.svg";
+import DifficultyIcon from "@/assets/icons/difficulty.svg";
+import PrepIcon from "@/assets/icons/prep-time.svg";
+import ServingIcon from "@/assets/icons/servings.svg";
 import RiceImg from "@/assets/images/recipes/Designer.jpeg";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
@@ -10,12 +11,18 @@ interface FeaturedRecipeCardProps {
   title: string;
   description: string;
   tag: string;
+  serving: number;
+  prepTime: number;
+  difficulty: "easy" | "medium" | "hard";
 }
 
 export function FeaturedRecipeCard({
   title,
   description,
   tag,
+  serving = 6,
+  prepTime = 60,
+  difficulty = "medium",
 }: FeaturedRecipeCardProps) {
   return (
     <Card
@@ -42,16 +49,30 @@ export function FeaturedRecipeCard({
         <Text variant="h3" className="mb-2">
           {title}
         </Text>
-        <Text variant="body">{description}</Text>
+        <Text variant="body" className="line-clamp-2">
+          {description}
+        </Text>
         <div className="h-[2px] bg-grey-500 mt-14 md:mt-10 xl:mt-12" />
-        <Flex className="mt-6">
-          <Flex gap="small">
-            <Image src={ServingSrc} alt="" />
-            <Text className="font-bold">60 min</Text>
+        <Flex className="mt-6 justify-between">
+          <Flex gap="x-small">
+            <Image src={ServingIcon} alt="" className="w-4 h-4 md:w-5 md:h-5" />
+            <Text className="font-bold text-sm md:text-base">
+              {prepTime} min
+            </Text>
           </Flex>
-          <Flex gap="small">
-            <Image src={PrepSrc} alt="" />
-            <Text>6 servings</Text>
+          <Flex gap="x-small">
+            <Image src={PrepIcon} alt="" className="w-4 h-4 md:w-5 md:h-5" />
+            <Text className="text-sm md:text-base">{serving} servings</Text>
+          </Flex>
+          <Flex gap="x-small">
+            <Image
+              src={DifficultyIcon}
+              alt=""
+              className="w-4 h-4 md:w-5 md:h-5"
+            />
+            <Text className="capitalize text-sm md:text-base">
+              {difficulty}
+            </Text>
           </Flex>
         </Flex>
       </CardContent>
