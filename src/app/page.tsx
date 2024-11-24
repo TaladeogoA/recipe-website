@@ -70,6 +70,12 @@ export default function Home() {
     },
   ];
 
+  const scrollToFeatured = () => {
+    document.getElementById("featured-recipes")?.scrollIntoView({
+      behavior: "smooth",
+    });
+  };
+
   return (
     <Page>
       <Flex
@@ -86,8 +92,12 @@ export default function Home() {
             recipes that bring people together.
           </Text>
           <div className="flex gap-4">
-            <PrimaryButton>discover recipes</PrimaryButton>
-            <SecondaryButton>about me</SecondaryButton>
+            <PrimaryButton onClick={scrollToFeatured}>
+              discover recipes
+            </PrimaryButton>
+            <Link href="/about">
+              <SecondaryButton>about me</SecondaryButton>
+            </Link>
           </div>
         </div>
 
@@ -157,7 +167,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full py-16 md:py-20 px-0 lg:px-10">
+      <section
+        id="featured-recipes"
+        className="w-full py-16 md:py-20 px-0 lg:px-10"
+      >
         <div className="container mx-auto">
           {/* Header - Desktop/Tablet */}
           <div className="hidden sm:flex sm:flex-row sm:items-center sm:justify-between gap-4 mb-12">
@@ -260,7 +273,9 @@ export default function Home() {
         <div className="container mx-auto px-6">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-12">
             <Text variant="h2">Browse our latest recipes</Text>
-            <SecondaryButton>Browse All Recipes</SecondaryButton>
+            <Link href="/recipes">
+              <SecondaryButton>Browse All Recipes</SecondaryButton>
+            </Link>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -378,7 +393,9 @@ export default function Home() {
                 </Flex>
               </div>
 
-              <PrimaryButton>More About Sarah</PrimaryButton>
+              <Link href="/about" className="w-full">
+                <PrimaryButton>More About Sarah</PrimaryButton>
+              </Link>
             </div>
           </div>
         </div>

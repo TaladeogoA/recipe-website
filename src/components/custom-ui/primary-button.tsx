@@ -12,7 +12,7 @@ export function PrimaryButton({ ...props }) {
         hover:before:translate-x-0
         [&>*]:relative [&>*]:z-[2]
         group
-        border border-black
+        border border-black w-full
       "
       {...props}
     >
