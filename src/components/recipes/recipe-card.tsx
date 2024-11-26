@@ -28,8 +28,7 @@ export function RecipeCard({
   return (
     <Link href="/recipes/1">
       <Card
-        className="group/card overflow-hidden rounded-none shadow-recipe border-none
-        min-h-[600px] lg:min-h-[700px] xl:h-[80vh]
+        className="group/card overflow-hidden rounded-none shadow-recipe border-none xl:h-[80vh]
         transition-all duration-300 ease-in-out
         hover:scale-90 relative"
       >
