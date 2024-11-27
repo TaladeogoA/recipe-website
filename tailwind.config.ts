@@ -85,6 +85,21 @@ export default {
       boxShadow: {
         recipe: "0px 7px 10px 0px rgba(220,220,220,0.5)",
       },
+      keyframes: {
+        fastPulse: {
+          "0%, 100%": {
+            opacity: "0.9",
+            backgroundColor: "rgb(220, 220, 220, 0.3)",
+          },
+          "50%": {
+            opacity: "0.5",
+            backgroundColor: "rgb(220, 220, 220, 0.2)",
+          },
+        },
+      },
+      animation: {
+        "fast-pulse": "fastPulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

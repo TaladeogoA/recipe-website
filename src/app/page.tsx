@@ -15,6 +15,8 @@ import { Text } from "@/components/custom-ui/text";
 import { AspectBox, Flex, Page } from "@/components/layouts";
 import { FeaturedRecipeCard } from "@/components/recipes/featured-recipe-card";
 import { RecipeCard } from "@/components/recipes/recipe-card";
+import { HomeSkeleton } from "@/components/skeletons/home-skeleton";
+import { useRecipeCategories } from "@/hooks/useRecipeCategories";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -46,6 +48,12 @@ export default function Home() {
 
   const y1 = useTransform(scrollYProgress, [0, 1], ["10px", "-30%"]);
   const y2 = useTransform(scrollYProgress, [0, 1], ["20px", "-15%"]);
+
+  const { data, isLoading } = useRecipeCategories();
+
+  if (isLoading) {
+    return <HomeSkeleton />;
+  }
 
   const categories = [
     {
