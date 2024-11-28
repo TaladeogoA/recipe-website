@@ -31,13 +31,7 @@ import {
   FaUser,
   FaYoutube,
 } from "react-icons/fa";
-import {
-  GiCakeSlice,
-  GiCook,
-  GiHeartPlus,
-  GiOpenBook,
-  GiStopwatch,
-} from "react-icons/gi";
+import { GiOpenBook } from "react-icons/gi";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -49,34 +43,11 @@ export default function Home() {
   const y1 = useTransform(scrollYProgress, [0, 1], ["10px", "-30%"]);
   const y2 = useTransform(scrollYProgress, [0, 1], ["20px", "-15%"]);
 
-  const { data, isLoading } = useRecipeCategories();
+  const { data: categories, isLoading } = useRecipeCategories();
 
   if (isLoading) {
     return <HomeSkeleton />;
   }
-
-  const categories = [
-    {
-      Icon: GiCook,
-      name: "Main Course",
-      description: "Hearty dishes for your dinner table",
-    },
-    {
-      Icon: GiCakeSlice,
-      name: "Desserts",
-      description: "Sweet treats for any occasion",
-    },
-    {
-      Icon: GiStopwatch,
-      name: "Quick & Easy",
-      description: "Ready in 30 minutes or less",
-    },
-    {
-      Icon: GiHeartPlus,
-      name: "Healthy",
-      description: "Nutritious and delicious options",
-    },
-  ];
 
   const scrollToFeatured = () => {
     document.getElementById("featured-recipes")?.scrollIntoView({
@@ -156,17 +127,23 @@ export default function Home() {
           </Text>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-            {categories.map((category) => (
+            {categories?.slice(0, 4).map((category) => (
               <div
-                key={category.name}
+                key={category._id}
                 className="flex flex-col items-center text-center"
               >
                 <div className="w-40 h-40 bg-brand-light rounded-lg mb-4 flex items-center justify-center">
-                  <category.Icon className="text-7xl text-brand-primary" />
+                  <Image
+                    src={category.icon}
+                    alt={category.title}
+                    width={96}
+                    height={96}
+                    className="text-brand-primary"
+                  />
                 </div>
                 <div className="h-[2px] bg-brand-primary w-12 mt-6 mb-4" />
                 <Text variant="h3" className="mb-2">
-                  {category.name}
+                  {category.title}
                 </Text>
                 <Text className="text-gray-600">{category.description}</Text>
               </div>

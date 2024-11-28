@@ -7,7 +7,8 @@ export async function getRecipeCategories(): Promise<RecipeCategory[]> {
       _id,
       title,
       slug,
-      description
+      description,
+      "icon": icon.asset->url
     }`
   );
 }
