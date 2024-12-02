@@ -4,7 +4,7 @@ import {
   getLatestRecipes,
   getRecipesByCategory,
 } from "@/lib/queries/recipe";
-import { Recipe } from "@/types/recipe";
+import { PaginatedResponse, Recipe } from "@/types/recipe";
 import { useQuery } from "@tanstack/react-query";
 
 export function useFeaturedRecipes() {
@@ -21,11 +21,17 @@ export function useLatestRecipes() {
   });
 }
 
-export function useRecipesByCategory(category: string | "all") {
-  return useQuery<Recipe[]>({
-    queryKey: ["recipes", category],
+export function useRecipesByCategory(
+  category: string | "all",
+  page: number = 1,
+  itemsPerPage: number = 9
+) {
+  return useQuery<PaginatedResponse<Recipe>>({
+    queryKey: ["recipes", category, page],
     queryFn: () =>
-      category === "all" ? getAllRecipes() : getRecipesByCategory(category),
+      category === "all"
+        ? getAllRecipes(page, itemsPerPage)
+        : getRecipesByCategory(category, page, itemsPerPage),
     enabled: !!category,
   });
 }

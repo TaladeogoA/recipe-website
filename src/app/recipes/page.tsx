@@ -1,4 +1,5 @@
 "use client";
+import { SecondaryButton } from "@/components/custom-ui/secondary-button";
 import { Text } from "@/components/custom-ui/text";
 import { Page } from "@/components/layouts";
 import MainRecipeCard from "@/components/recipes/main-recipe-card";
@@ -8,8 +9,12 @@ import { useRecipeCategories } from "@/hooks/useRecipeCategories";
 import { useFeaturedRecipes, useRecipesByCategory } from "@/hooks/useRecipes";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useState } from "react";
 
 const RecipesPage = () => {
+  const [page, setPage] = useState(1);
+  const ITEMS_PER_PAGE = 9;
+
   const pathname = usePathname();
   const currentCategory =
     pathname === "/recipes" ? "all" : pathname.split("/").pop() || "all";
@@ -18,8 +23,14 @@ const RecipesPage = () => {
     useRecipeCategories();
   const { data: featuredRecipes, isLoading: featuredLoading } =
     useFeaturedRecipes();
-  const { data: recipes, isLoading: recipesLoading } =
-    useRecipesByCategory(currentCategory);
+  const { data: recipesData, isLoading: recipesLoading } = useRecipesByCategory(
+    currentCategory,
+    page,
+    ITEMS_PER_PAGE
+  );
+
+  const recipes = recipesData?.items;
+  const totalPages = Math.ceil((recipesData?.total || 0) / ITEMS_PER_PAGE);
 
   if (categoriesLoading || featuredLoading || recipesLoading) {
     return <RecipesPageSkeleton />;
@@ -105,7 +116,27 @@ const RecipesPage = () => {
           ))}
         </div>
 
-        {/* Pagination button */}
+        {totalPages > 1 && (
+          <div className="flex justify-center mt-12 gap-4">
+            <SecondaryButton
+              onClick={() => setPage((p) => Math.max(1, p - 1))}
+              disabled={page === 1}
+            >
+              previous
+            </SecondaryButton>
+
+            <span className="flex items-center">
+              Page {page} of {totalPages}
+            </span>
+
+            <SecondaryButton
+              onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+              disabled={page === totalPages}
+            >
+              next
+            </SecondaryButton>
+          </div>
+        )}
       </section>
     </Page>
   );

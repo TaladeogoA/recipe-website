@@ -13,6 +13,8 @@ export function SecondaryButton({ ...props }) {
         [&>*]:relative [&>*]:z-[2]
         group
         border border-black
+        disabled:opacity-50 disabled:cursor-not-allowed
+        disabled:hover:before:translate-x-full
       "
       {...props}
     >

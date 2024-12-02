@@ -31,6 +31,11 @@ export interface Recipe {
   categories: ResolvedCategory[];
 }
 
+export interface PaginatedResponse<T> {
+  items: T[];
+  total: number;
+}
+
 interface ResolvedCategory {
   _id: string;
   title: string;

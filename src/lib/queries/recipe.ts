@@ -1,5 +1,5 @@
 import { client } from "@/lib/client";
-import { Recipe, RecipeCategory } from "@/types/recipe";
+import { PaginatedResponse, Recipe, RecipeCategory } from "@/types/recipe";
 
 export async function getRecipeCategories(): Promise<RecipeCategory[]> {
   return client.fetch(
@@ -66,58 +66,57 @@ export async function getLatestRecipes(): Promise<Recipe[]> {
 }
 
 export async function getRecipesByCategory(
-  category: string
-): Promise<Recipe[]> {
+  category: string,
+  page: number = 1,
+  itemsPerPage: number = 9
+): Promise<PaginatedResponse<Recipe>> {
+  const start = (page - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+
   return client.fetch(
-    `
-    *[_type == "recipe" && $category in categories[]->title] {
+    `{
+    "items": *[_type == "recipe" && $category in categories[]->title] | order(publishedAt desc)[$start...$end] {
       _id,
       title,
       slug,
       description,
-      "mainImage": {
-        "asset": {
-          "url": mainImage.asset->url
-        },
-        "alt": mainImage.alt
-      },
+      "mainImage": { "asset": { "url": mainImage.asset->url }, "alt": mainImage.alt },
       prepTime,
-      cookTime,
       servings,
       difficulty,
-      "categories": categories[]-> {
-        _id,
-        title,
-        slug
-      }
-    }
-  `,
-    { category }
+      "categories": categories[]->{ _id, title, slug }
+    },
+    "total": count(*[_type == "recipe" && $category in categories[]->title])
+  }`,
+    { category, start, end }
   );
 }
 
-export async function getAllRecipes(): Promise<Recipe[]> {
-  return client.fetch(`
-    *[_type == "recipe"] | order(publishedAt desc) {
+export async function getAllRecipes(
+  page: number = 1,
+  itemsPerPage: number = 9
+): Promise<PaginatedResponse<Recipe>> {
+  const start = (page - 1) * itemsPerPage;
+  const end = start + itemsPerPage;
+
+  return client.fetch(
+    `{
+    "items": *[_type == "recipe"] | order(publishedAt desc)[$start...$end] {
       _id,
       title,
       slug,
       description,
       "mainImage": {
-        "asset": {
-          "url": mainImage.asset->url
-        },
+        "asset": { "url": mainImage.asset->url },
         "alt": mainImage.alt
       },
       prepTime,
-      cookTime,
       servings,
       difficulty,
-      "categories": categories[]-> {
-        _id,
-        title,
-        slug
-      }
-    }
-  `);
+      "categories": categories[]->{ _id, title, slug }
+    },
+    "total": count(*[_type == "recipe"])
+  }`,
+    { start, end }
+  );
 }
