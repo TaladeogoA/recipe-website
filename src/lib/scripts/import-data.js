@@ -204,4 +204,5 @@ async function importRecipes(recipes) {
   }
 }
 
+export { importIngredients, importRecipes };
 // call import function as needed then run the script node src/lib/scripts/import-data.js in the terminal

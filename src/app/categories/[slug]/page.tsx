@@ -7,18 +7,12 @@ import { RecipesPageSkeleton } from "@/components/skeletons/recipes-page-skeleto
 import { useCategory } from "@/hooks/useRecipeCategories";
 import { useRecipesByCategory } from "@/hooks/useRecipes";
 import Link from "next/link";
-import { use, type Usable } from "react";
+import { useParams } from "next/navigation";
 import { FaChevronLeft } from "react-icons/fa";
 
-interface CategoryParams {
-  params: Usable<{
-    slug: string;
-  }>;
-}
-
-export default function CategoryPage({ params }: CategoryParams) {
-  const unwrappedParams = use(params) as { slug: string };
-  const slug = unwrappedParams.slug;
+export default function CategoryPage() {
+  const params = useParams();
+  const slug = params.slug as string;
 
   const { data: category, isLoading: categoryLoading } = useCategory(slug);
   const { data: recipesData, isLoading: recipesLoading } = useRecipesByCategory(

@@ -2,11 +2,13 @@
 import { Text } from "@/components/custom-ui/text";
 import { Page } from "@/components/layouts";
 import { RecipeCard } from "@/components/recipes/recipe-card";
+import { RecipesPageSkeleton } from "@/components/skeletons/recipes-page-skeleton";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useSearchRecipes } from "@/hooks/useSearchRecipes";
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
-export default function SearchPage() {
+function SearchResults() {
   const searchParams = useSearchParams();
   const query = searchParams.get("q") || "";
   const { data: recipes, isLoading } = useSearchRecipes(query);
@@ -64,5 +66,13 @@ export default function SearchPage() {
         </div>
       </section>
     </Page>
+  );
+}
+
+export default function SearchPage() {
+  return (
+    <Suspense fallback={<RecipesPageSkeleton />}>
+      <SearchResults />
+    </Suspense>
   );
 }
