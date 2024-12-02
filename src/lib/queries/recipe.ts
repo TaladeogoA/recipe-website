@@ -66,7 +66,7 @@ export async function getLatestRecipes(): Promise<Recipe[]> {
 }
 
 export async function getRecipesByCategory(
-  category: string,
+  categorySlug: string,
   page: number = 1,
   itemsPerPage: number = 9
 ): Promise<PaginatedResponse<Recipe>> {
@@ -75,20 +75,25 @@ export async function getRecipesByCategory(
 
   return client.fetch(
     `{
-    "items": *[_type == "recipe" && $category in categories[]->title] | order(publishedAt desc)[$start...$end] {
+    "items": *[_type == "recipe" && references(*[_type == "recipeCategory" && slug.current == $categorySlug]._id)][${start}...${end}] {
       _id,
       title,
       slug,
       description,
-      "mainImage": { "asset": { "url": mainImage.asset->url }, "alt": mainImage.alt },
+      "mainImage": {
+        "asset": {
+          "url": mainImage.asset->url
+        },
+        "alt": mainImage.alt
+      },
       prepTime,
       servings,
       difficulty,
       "categories": categories[]->{ _id, title, slug }
     },
-    "total": count(*[_type == "recipe" && $category in categories[]->title])
+    "total": count(*[_type == "recipe" && references(*[_type == "recipeCategory" && slug.current == $categorySlug]._id)])
   }`,
-    { category, start, end }
+    { categorySlug }
   );
 }
 
@@ -150,6 +155,21 @@ export async function getRecipeBySlug(slug: string): Promise<Recipe> {
       },
       conclusion,
       "categories": categories[]->{ _id, title }
+    }
+  `,
+    { slug }
+  );
+}
+
+export async function getCategoryBySlug(slug: string): Promise<RecipeCategory> {
+  return client.fetch(
+    `
+    *[_type == "recipeCategory" && slug.current == $slug][0] {
+      _id,
+      title,
+      slug,
+      description,
+      "icon": icon.asset->url
     }
   `,
     { slug }

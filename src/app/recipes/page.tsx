@@ -2,12 +2,11 @@
 import { SecondaryButton } from "@/components/custom-ui/secondary-button";
 import { Text } from "@/components/custom-ui/text";
 import { Page } from "@/components/layouts";
+import { CategoryTabs } from "@/components/recipes/category-tabs";
 import MainRecipeCard from "@/components/recipes/main-recipe-card";
 import { RecipeCard } from "@/components/recipes/recipe-card";
 import { RecipesPageSkeleton } from "@/components/skeletons/recipes-page-skeleton";
-import { useRecipeCategories } from "@/hooks/useRecipeCategories";
 import { useFeaturedRecipes, useRecipesByCategory } from "@/hooks/useRecipes";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
@@ -19,8 +18,6 @@ const RecipesPage = () => {
   const currentCategory =
     pathname === "/recipes" ? "all" : pathname.split("/").pop() || "all";
 
-  const { data: categories, isLoading: categoriesLoading } =
-    useRecipeCategories();
   const { data: featuredRecipes, isLoading: featuredLoading } =
     useFeaturedRecipes();
   const { data: recipesData, isLoading: recipesLoading } = useRecipesByCategory(
@@ -32,7 +29,7 @@ const RecipesPage = () => {
   const recipes = recipesData?.items;
   const totalPages = Math.ceil((recipesData?.total || 0) / ITEMS_PER_PAGE);
 
-  if (categoriesLoading || featuredLoading || recipesLoading) {
+  if (featuredLoading || recipesLoading) {
     return <RecipesPageSkeleton />;
   }
 
@@ -69,36 +66,7 @@ const RecipesPage = () => {
       <section className="py-16 md:py-20 px-10 md:px-14">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-8 mb-12">
           <Text variant="h1">Latest recipes</Text>
-          <div className="flex flex-row flex-wrap gap-4">
-            {[
-              "all",
-              ...(categories?.map((c) => c.title) || []).slice(0, 6),
-            ].map((category) => {
-              const href =
-                category === "all"
-                  ? "/recipes"
-                  : `/categories/${category.toLowerCase().replace(/ & /g, "-").replace(/ /g, "-")}`;
-
-              const isActive =
-                category === "all"
-                  ? pathname === "/recipes"
-                  : pathname === href;
-
-              return (
-                <Link
-                  key={category}
-                  href={href}
-                  className={`px-4 py-2 transition-all duration-200 ${
-                    isActive
-                      ? "bg-black text-white"
-                      : "bg-white text-black shadow-md hover:shadow-lg"
-                  }`}
-                >
-                  <Text className="text-sm">{category}</Text>
-                </Link>
-              );
-            })}
-          </div>
+          <CategoryTabs />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">

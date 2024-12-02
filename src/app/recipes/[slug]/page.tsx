@@ -146,7 +146,8 @@ const SingleRecipePage = () => {
                     <Skeleton key={i} className="h-[400px] w-full" />
                   ))
                 : latestRecipes
-                    ?.slice(0, 3)
+                    ?.filter((recipe) => recipe.slug.current !== slug)
+                    .slice(0, 3)
                     .map((recipe) => (
                       <RecipeCard
                         key={recipe._id}
