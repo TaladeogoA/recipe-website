@@ -69,11 +69,12 @@ export default function Home() {
         <div className="w-full md:w-[45%] px-6 md:px-14 flex flex-col pb-10 md:pb-30 mt-16 md:mt-[18%]">
           <div className="h-[2px] bg-brand-primary w-32 mb-8 md:mb-12" />
           <Text variant="h1" className="mb-4">
-            A Kitchen Where Stories Come to Life
+            A Kitchen Where Global Flavors Come to Life
           </Text>
           <Text className="mb-6 md:mb-10">
-            From our kitchen to yours - explore, create and share mouthwatering
-            recipes that bring people together.
+            From traditional family recipes to modern fusion dishes, explore a
+            world of culinary adventures. Join us in celebrating the universal
+            language of food.
           </Text>
           <div className="flex gap-4">
             <PrimaryButton onClick={scrollToFeatured}>
@@ -340,9 +341,11 @@ export default function Home() {
                 About Sarah Mitchell
               </Text>
               <Text className="text-gray-600 mb-8">
-                Passionate about making cooking accessible and enjoyable for
-                everyone. With over 10 years of culinary experience, I share
-                recipes that bring joy to your kitchen.
+                Growing up in a multicultural household with an Italian mother
+                and Lebanese father, I learned that food transcends borders.
+                After training at Le Cordon Bleu and exploring cuisines across
+                four continents, I&apos;m here to share authentic recipes that
+                bring global flavors to your kitchen.
               </Text>
 
               <div className="space-y-6 mb-10">
@@ -352,7 +355,7 @@ export default function Home() {
                   </div>
                   <div>
                     <Text className="font-bold">400+ Recipes</Text>
-                    <Text className="text-gray-600">Published Online</Text>
+                    <Text className="text-gray-600">From Around the World</Text>
                   </div>
                 </Flex>
 
@@ -362,7 +365,7 @@ export default function Home() {
                   </div>
                   <div>
                     <Text className="font-bold">1.2M+ Followers</Text>
-                    <Text className="text-gray-600">Across Social Media</Text>
+                    <Text className="text-gray-600">Global Food Community</Text>
                   </div>
                 </Flex>
 
