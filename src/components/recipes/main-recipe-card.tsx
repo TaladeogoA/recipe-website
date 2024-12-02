@@ -1,12 +1,12 @@
 import DifficultyIcon from "@/assets/icons/difficulty.svg";
 import PrepIcon from "@/assets/icons/prep-time.svg";
 import ServingIcon from "@/assets/icons/servings.svg";
-import RiceImg from "@/assets/images/recipes/Designer.jpeg";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 import { Text } from "../custom-ui/text";
 import { AspectBox, Flex } from "../layouts";
+import { RecipeTag } from "./recipe-tag";
 
 interface MainRecipeCardProps {
   title: string;
@@ -15,6 +15,8 @@ interface MainRecipeCardProps {
   serving: number;
   prepTime: number;
   difficulty: "easy" | "medium" | "hard";
+  image: string;
+  imageAlt: string;
 }
 
 const MainRecipeCard = ({
@@ -24,6 +26,8 @@ const MainRecipeCard = ({
   serving = 6,
   prepTime = 60,
   difficulty = "medium",
+  image,
+  imageAlt,
 }: MainRecipeCardProps) => {
   return (
     <Link href="/recipes/1">
@@ -33,15 +37,13 @@ const MainRecipeCard = ({
           <div className="w-full md:w-[60%] relative">
             <AspectBox ratio="wide" className="relative w-full h-full">
               <Image
-                src={RiceImg}
-                alt={title}
+                src={image}
+                alt={imageAlt ? imageAlt : title}
                 fill
                 className="object-cover transition-transform duration-300 ease-in-out group-hover/card:scale-110"
               />
             </AspectBox>
-            <div className="absolute top-6 right-6 z-10 bg-black text-white px-4 py-2">
-              <Text className="text-sm text-white">{tag}</Text>
-            </div>
+            <RecipeTag tag={tag} />
           </div>
 
           {/* Content Container */}
