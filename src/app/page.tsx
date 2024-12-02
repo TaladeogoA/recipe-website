@@ -187,14 +187,15 @@ export default function Home() {
           </div>
 
           {/* Slick Carousel */}
-          <div className="relative">
+          <div className="relative" dir="rtl">
             <Slider
               ref={(c) => setSlider(c)}
               infinite={true}
               speed={500}
-              slidesToShow={2.1}
+              slidesToShow={2.7}
               slidesToScroll={1}
               arrows={false}
+              rtl={true}
               responsive={[
                 {
                   breakpoint: 768,
@@ -215,7 +216,7 @@ export default function Home() {
               ]}
             >
               {featuredRecipes?.map((recipe) => (
-                <div key={recipe._id} className="md:px-3">
+                <div key={recipe._id} className="md:px-3" dir="ltr">
                   <FeaturedRecipeCard
                     slug={recipe.slug}
                     title={recipe.title}

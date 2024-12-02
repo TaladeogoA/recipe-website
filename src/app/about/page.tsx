@@ -148,14 +148,15 @@ const AboutPage = () => {
             </Text>
           </div>
 
-          <div className="relative">
+          <div className="relative" dir="rtl">
             <Slider
               ref={(c) => setReviewSlider(c)}
               infinite={true}
               speed={500}
-              slidesToShow={2.1}
+              slidesToShow={2.5}
               slidesToScroll={1}
               arrows={false}
+              rtl={true}
               responsive={[
                 {
                   breakpoint: 768,
@@ -174,7 +175,7 @@ const AboutPage = () => {
                 },
               ]}
             >
-              <div className="md:px-3">
+              <div className="md:px-3" dir="ltr">
                 <ReviewCard
                   tagline="Perfect Lebanese Recipes"
                   review="Sarah's hummus recipe reminds me of my grandmother's. The detailed tips about tahini quality made all the difference!"
@@ -184,7 +185,7 @@ const AboutPage = () => {
                   }}
                 />
               </div>
-              <div className="md:px-3">
+              <div className="md:px-3" dir="ltr">
                 <ReviewCard
                   tagline="Fusion Done Right"
                   review="The Mediterranean-Asian fusion recipes are innovative yet respectful to both cultures. The miso pasta is now a weekly staple!"
@@ -194,7 +195,7 @@ const AboutPage = () => {
                   }}
                 />
               </div>
-              <div className="md:px-3">
+              <div className="md:px-3" dir="ltr">
                 <ReviewCard
                   tagline="Made Me a Better Cook"
                   review="The detailed instructions and cultural context behind each recipe have transformed my approach to cooking. Thank you Sarah!"
@@ -204,7 +205,7 @@ const AboutPage = () => {
                   }}
                 />
               </div>
-              <div className="md:px-3">
+              <div className="md:px-3" dir="ltr">
                 <ReviewCard
                   tagline="Authentic Italian Flavors"
                   review="As an Italian, I'm usually skeptical of Italian recipes online, but Sarah's recipes are the real deal. Her tiramisu is perfection!"
