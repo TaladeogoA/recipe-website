@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { Text } from "../custom-ui/text";
+import { SearchBox } from "../navbar/search-box";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,25 +63,7 @@ const Navbar = () => {
         <div className="flex items-center gap-4">
           {/* Desktop Search */}
           <div className="hidden md:flex items-center relative">
-            <input
-              type="text"
-              placeholder="Search for recipes"
-              className="w-full px-8 py-4 pl-10 text-gray-800 bg-gray-100 rounded-none focus:outline-none hover:bg-gray-200"
-            />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-gray-900 absolute left-3"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
+            <SearchBox />
           </div>
 
           {/* Mobile Menu Button */}
@@ -144,27 +127,8 @@ const Navbar = () => {
         <div className="max-w-7xl mx-auto px-4">
           {/* Mobile Search */}
           <div className="relative mb-6">
-            <input
-              type="text"
-              placeholder="Search for recipes"
-              className="w-full px-8 py-4 pl-10 text-gray-800 bg-gray-100 rounded-none focus:outline-none hover:bg-gray-200"
-            />
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-gray-900 absolute left-3 top-1/2 -translate-y-1/2"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-              />
-            </svg>
+            <SearchBox />
           </div>
-
           {/* Mobile menu items */}
           <ul className="flex flex-col gap-4 pb-4">
             <li>

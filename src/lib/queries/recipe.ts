@@ -175,3 +175,28 @@ export async function getCategoryBySlug(slug: string): Promise<RecipeCategory> {
     { slug }
   );
 }
+
+export async function searchRecipes(searchTerm: string): Promise<Recipe[]> {
+  return client.fetch(`
+    *[_type == "recipe" && (
+      title match "*${searchTerm}*" ||
+      description match "*${searchTerm}*" ||
+      categories[]->title match "*${searchTerm}*"
+    )] {
+      _id,
+      title,
+      slug,
+      description,
+      "mainImage": {
+        "asset": {
+          "url": mainImage.asset->url
+        },
+        "alt": mainImage.alt
+      },
+      prepTime,
+      servings,
+      difficulty,
+      "categories": categories[]->{ _id, title }
+    }
+  `);
+}
