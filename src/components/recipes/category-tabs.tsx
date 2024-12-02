@@ -25,7 +25,7 @@ export function CategoryTabs() {
           <Link
             key={category}
             href={href}
-            className={`px-4 py-2 transition-all duration-200 ${
+            className={`px-4 py-2 transition-all lowercase duration-200 ${
               isActive
                 ? "bg-black text-white"
                 : "bg-white text-black shadow-md hover:shadow-lg"
