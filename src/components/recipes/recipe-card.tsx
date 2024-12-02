@@ -1,12 +1,12 @@
 import DifficultyIcon from "@/assets/icons/difficulty.svg";
 import PrepIcon from "@/assets/icons/prep-time.svg";
 import ServingIcon from "@/assets/icons/servings.svg";
-import RiceImg from "@/assets/images/recipes/Designer.jpeg";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
 import { Text } from "../custom-ui/text";
 import { AspectBox, Flex } from "../layouts";
+import { RecipeTag } from "./recipe-tag";
 
 interface RecipeCardProps {
   title: string;
@@ -15,6 +15,8 @@ interface RecipeCardProps {
   serving: number;
   prepTime: number;
   difficulty: "easy" | "medium" | "hard";
+  image: string;
+  imageAlt: string;
 }
 
 export function RecipeCard({
@@ -24,6 +26,8 @@ export function RecipeCard({
   serving,
   prepTime,
   difficulty,
+  image,
+  imageAlt,
 }: RecipeCardProps) {
   return (
     <Link href="/recipes/1">
@@ -32,17 +36,17 @@ export function RecipeCard({
         transition-all duration-300 ease-in-out
         hover:scale-90 relative"
       >
-        <div className="absolute top-6 right-6 z-10 bg-black text-white px-4 py-2">
-          <Text className="text-sm text-white">{tag}</Text>
-        </div>
+        <RecipeTag tag={tag} />
 
         <AspectBox
           ratio="wide"
           className="overflow-hidden h-[45%] lg:h-[50%] xl:h-[57%]"
         >
           <Image
-            src={RiceImg}
-            alt={title}
+            src={image}
+            alt={imageAlt ? imageAlt : title}
+            width={1200}
+            height={800}
             className="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover/card:scale-110"
           />
         </AspectBox>
@@ -60,6 +64,8 @@ export function RecipeCard({
               <Image
                 src={ServingIcon}
                 alt=""
+                width={20}
+                height={20}
                 className="w-4 h-4 md:w-5 md:h-5"
               />
               <Text className="font-bold text-sm md:text-base">
@@ -67,13 +73,21 @@ export function RecipeCard({
               </Text>
             </Flex>
             <Flex gap="x-small">
-              <Image src={PrepIcon} alt="" className="w-4 h-4 md:w-5 md:h-5" />
+              <Image
+                src={PrepIcon}
+                alt=""
+                width={20}
+                height={20}
+                className="w-4 h-4 md:w-5 md:h-5"
+              />
               <Text className="text-sm md:text-base">{serving} servings</Text>
             </Flex>
             <Flex gap="x-small">
               <Image
                 src={DifficultyIcon}
                 alt=""
+                width={20}
+                height={20}
                 className="w-4 h-4 md:w-5 md:h-5"
               />
               <Text className="capitalize text-sm md:text-base">

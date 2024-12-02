@@ -17,6 +17,7 @@ import { FeaturedRecipeCard } from "@/components/recipes/featured-recipe-card";
 import { RecipeCard } from "@/components/recipes/recipe-card";
 import { HomeSkeleton } from "@/components/skeletons/home-skeleton";
 import { useRecipeCategories } from "@/hooks/useRecipeCategories";
+import { useFeaturedRecipes, useLatestRecipes } from "@/hooks/useRecipes";
 import { motion, useScroll, useTransform } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -44,8 +45,12 @@ export default function Home() {
   const y2 = useTransform(scrollYProgress, [0, 1], ["20px", "-15%"]);
 
   const { data: categories, isLoading } = useRecipeCategories();
+  const { data: featuredRecipes, isLoading: isFeaturedLoading } =
+    useFeaturedRecipes();
+  const { data: latestRecipes, isLoading: isLatestLoading } =
+    useLatestRecipes();
 
-  if (isLoading) {
+  if (isLoading || isFeaturedLoading || isLatestLoading) {
     return <HomeSkeleton />;
   }
 
@@ -120,7 +125,7 @@ export default function Home() {
         <div className="absolute right-0 top-0 w-1/2 h-screen -z-10 bg-brand-light md:block hidden"></div>
       </Flex>
 
-      <section className="w-full pt-10 pb-20 mt-10 lg:mt-0 px-0 lg:px-10">
+      <section className="w-full pt-10 pb-20 mt-10 px-0 lg:px-10">
         <div className="container mx-auto px-6">
           <Text variant="h2" className="text-center mb-12">
             Browse by Category
@@ -128,25 +133,28 @@ export default function Home() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {categories?.slice(0, 4).map((category) => (
-              <div
+              <Link
+                href={`/categories/${category.slug.current}`}
                 key={category._id}
-                className="flex flex-col items-center text-center"
+                className="group hover:scale-95 transition-transform duration-200"
               >
-                <div className="w-40 h-40 bg-brand-light rounded-lg mb-4 flex items-center justify-center">
-                  <Image
-                    src={category.icon}
-                    alt={category.title}
-                    width={96}
-                    height={96}
-                    className="text-brand-primary"
-                  />
+                <div className="flex flex-col items-center text-center">
+                  <div className="w-40 h-40 bg-brand-light rounded-lg mb-4 flex items-center justify-center group-hover:bg-brand-light/80 transition-colors">
+                    <Image
+                      src={category.icon}
+                      alt={category.title}
+                      width={96}
+                      height={96}
+                      className="text-brand-primary"
+                    />
+                  </div>
+                  <div className="h-[2px] bg-brand-primary w-12 mt-6 mb-4" />
+                  <Text variant="h3" className="mb-2">
+                    {category.title}
+                  </Text>
+                  <Text className="text-gray-600">{category.description}</Text>
                 </div>
-                <div className="h-[2px] bg-brand-primary w-12 mt-6 mb-4" />
-                <Text variant="h3" className="mb-2">
-                  {category.title}
-                </Text>
-                <Text className="text-gray-600">{category.description}</Text>
-              </div>
+              </Link>
             ))}
           </div>
         </div>
@@ -205,46 +213,20 @@ export default function Home() {
                 },
               ]}
             >
-              <div className="md:px-3">
-                <FeaturedRecipeCard
-                  title="Creamy Garlic Parmesan Pasta"
-                  description="A rich and creamy pasta dish made with fresh garlic, parmesan cheese, and herbs."
-                  tag="main course"
-                  prepTime={45}
-                  serving={6}
-                  difficulty="easy"
-                />
-              </div>
-              <div className="md:px-3">
-                <FeaturedRecipeCard
-                  title="Spicy Thai Basil Chicken"
-                  description="A flavorful stir-fry with Thai basil, chilies, and aromatic sauce."
-                  tag="main course"
-                  prepTime={45}
-                  serving={6}
-                  difficulty="easy"
-                />
-              </div>
-              <div className="md:px-3">
-                <FeaturedRecipeCard
-                  title="Mediterranean Quinoa Bowl"
-                  description="Fresh and healthy bowl with quinoa, vegetables, and feta cheese."
-                  tag="healthy"
-                  prepTime={45}
-                  serving={6}
-                  difficulty="easy"
-                />
-              </div>
-              <div className="md:px-3">
-                <FeaturedRecipeCard
-                  title="Classic Chocolate Brownies"
-                  description="Rich and fudgy brownies with a perfect crackly top."
-                  tag="dessert"
-                  prepTime={45}
-                  serving={6}
-                  difficulty="easy"
-                />
-              </div>
+              {featuredRecipes?.map((recipe) => (
+                <div key={recipe._id} className="md:px-3">
+                  <FeaturedRecipeCard
+                    title={recipe.title}
+                    description={recipe.description}
+                    tag={recipe.categories[0]?.title}
+                    prepTime={recipe.prepTime}
+                    serving={recipe.servings}
+                    difficulty={recipe.difficulty}
+                    image={recipe.mainImage.asset.url}
+                    imageAlt={recipe.mainImage.alt}
+                  />
+                </div>
+              ))}
             </Slider>
 
             {/* Mobile Navigation */}
@@ -276,15 +258,17 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-            {[...Array(6)].map((_, i) => (
+            {latestRecipes?.map((recipe) => (
               <RecipeCard
-                key={i}
-                title="Creamy Garlic Parmesan Pasta"
-                description="A rich and creamy pasta dish made with fresh garlic, parmesan cheese, and herbs."
-                tag="main course"
-                serving={6}
-                prepTime={60}
-                difficulty="easy"
+                key={recipe._id}
+                title={recipe.title}
+                description={recipe.description}
+                tag={recipe.categories[0]?.title}
+                serving={recipe.servings}
+                prepTime={recipe.prepTime}
+                difficulty={recipe.difficulty}
+                image={recipe.mainImage.asset.url}
+                imageAlt={recipe.mainImage.alt}
               />
             ))}
           </div>
