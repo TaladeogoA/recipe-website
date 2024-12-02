@@ -2,6 +2,7 @@ import {
   getAllRecipes,
   getFeaturedRecipes,
   getLatestRecipes,
+  getRecipeBySlug,
   getRecipesByCategory,
 } from "@/lib/queries/recipe";
 import { PaginatedResponse, Recipe } from "@/types/recipe";
@@ -33,5 +34,13 @@ export function useRecipesByCategory(
         ? getAllRecipes(page, itemsPerPage)
         : getRecipesByCategory(category, page, itemsPerPage),
     enabled: !!category,
+  });
+}
+
+export function useRecipe(slug: string) {
+  return useQuery({
+    queryKey: ["recipe", slug],
+    queryFn: () => getRecipeBySlug(slug),
+    enabled: !!slug,
   });
 }

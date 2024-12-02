@@ -216,6 +216,7 @@ export default function Home() {
               {featuredRecipes?.map((recipe) => (
                 <div key={recipe._id} className="md:px-3">
                   <FeaturedRecipeCard
+                    slug={recipe.slug}
                     title={recipe.title}
                     description={recipe.description}
                     tag={recipe.categories[0]?.title}
@@ -260,6 +261,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
             {latestRecipes?.map((recipe) => (
               <RecipeCard
+                slug={recipe.slug}
                 key={recipe._id}
                 title={recipe.title}
                 description={recipe.description}
@@ -268,7 +270,7 @@ export default function Home() {
                 prepTime={recipe.prepTime}
                 difficulty={recipe.difficulty}
                 image={recipe.mainImage.asset.url}
-                imageAlt={recipe.mainImage.alt}
+                imageAlt={recipe.mainImage.alt || recipe.title}
               />
             ))}
           </div>

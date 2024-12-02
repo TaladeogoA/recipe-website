@@ -16,7 +16,10 @@ interface FeaturedRecipeCardProps {
   prepTime: number;
   difficulty: "easy" | "medium" | "hard";
   image: string;
-  imageAlt: string;
+  imageAlt?: string;
+  slug: {
+    current: string;
+  };
 }
 
 export function FeaturedRecipeCard({
@@ -28,9 +31,10 @@ export function FeaturedRecipeCard({
   difficulty = "medium",
   image,
   imageAlt,
+  slug,
 }: FeaturedRecipeCardProps) {
   return (
-    <Link href="/recipes/1">
+    <Link href={`/recipes/${slug.current}`}>
       <Card
         className="group/card overflow-hidden rounded-none shadow-recipe border-none h-[80vh]
     transition-all duration-300 ease-in-out

@@ -20,12 +20,15 @@ export interface Recipe {
     asset: {
       url: string;
     };
-    alt: string;
+    alt?: string;
   };
   prepTime: number;
   cookTime: number;
   servings: number;
   difficulty: "easy" | "medium" | "hard";
+  ingredients: RecipeIngredient[];
+  instructions: Instruction[];
+  conclusion?: string;
   featured: boolean;
   publishedAt: string;
   categories: ResolvedCategory[];
@@ -41,5 +44,21 @@ interface ResolvedCategory {
   title: string;
   slug: {
     current: string;
+  };
+}
+
+interface RecipeIngredient {
+  ingredient: string;
+  amount: string;
+  notes?: string;
+}
+
+interface Instruction {
+  step: number;
+  description: string;
+  image?: {
+    asset: {
+      url: string;
+    };
   };
 }

@@ -120,3 +120,38 @@ export async function getAllRecipes(
     { start, end }
   );
 }
+
+export async function getRecipeBySlug(slug: string): Promise<Recipe> {
+  return client.fetch(
+    `
+    *[_type == "recipe" && slug.current == $slug][0] {
+      _id,
+      title,
+      description,
+      "mainImage": {
+        "asset": {
+          "url": mainImage.asset->url
+        },
+        "alt": mainImage.alt
+      },
+      prepTime,
+      cookTime,
+      servings,
+      difficulty,
+      ingredients[]{
+        amount,
+        notes,
+        "ingredient": ingredient->name
+      },
+      instructions[]{
+        step,
+        description,
+        "image": image.asset->url
+      },
+      conclusion,
+      "categories": categories[]->{ _id, title }
+    }
+  `,
+    { slug }
+  );
+}

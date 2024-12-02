@@ -50,6 +50,7 @@ const RecipesPage = () => {
 
           {featuredRecipes?.[0] && (
             <MainRecipeCard
+              slug={featuredRecipes[0].slug}
               title={featuredRecipes[0].title}
               description={featuredRecipes[0].description}
               tag={featuredRecipes[0].categories[0]?.title}
@@ -103,6 +104,7 @@ const RecipesPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
           {recipes?.map((recipe) => (
             <RecipeCard
+              slug={recipe.slug}
               key={recipe._id}
               title={recipe.title}
               description={recipe.description}

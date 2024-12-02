@@ -17,6 +17,9 @@ interface RecipeCardProps {
   difficulty: "easy" | "medium" | "hard";
   image: string;
   imageAlt: string;
+  slug: {
+    current: string;
+  };
 }
 
 export function RecipeCard({
@@ -28,9 +31,10 @@ export function RecipeCard({
   difficulty,
   image,
   imageAlt,
+  slug,
 }: RecipeCardProps) {
   return (
-    <Link href="/recipes/1">
+    <Link href={`/recipes/${slug.current}`}>
       <Card
         className="group/card overflow-hidden rounded-none shadow-recipe border-none xl:h-[80vh]
         transition-all duration-300 ease-in-out

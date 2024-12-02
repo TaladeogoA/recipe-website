@@ -17,6 +17,9 @@ interface MainRecipeCardProps {
   difficulty: "easy" | "medium" | "hard";
   image: string;
   imageAlt: string;
+  slug: {
+    current: string;
+  };
 }
 
 const MainRecipeCard = ({
@@ -28,9 +31,10 @@ const MainRecipeCard = ({
   difficulty = "medium",
   image,
   imageAlt,
+  slug,
 }: MainRecipeCardProps) => {
   return (
-    <Link href="/recipes/1">
+    <Link href={`/recipes/${slug.current}`}>
       <Card className="group/card overflow-hidden rounded-none shadow-recipe border-none">
         <div className="flex flex-col md:flex-row">
           {/* Image Container */}
