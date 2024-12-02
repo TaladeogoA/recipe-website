@@ -188,7 +188,7 @@ const AboutPage = () => {
               <div className="md:px-3" dir="ltr">
                 <ReviewCard
                   tagline="Fusion Done Right"
-                  review="The Mediterranean-Asian fusion recipes are innovative yet respectful to both cultures. The miso pasta is now a weekly staple!"
+                  review="The fusion recipes are innovative yet respectful to both cultures. The way traditional ingredients are combined creates exciting new flavors I can't get enough of!"
                   author={{
                     name: "James Chen",
                     image: JamesSrc,
