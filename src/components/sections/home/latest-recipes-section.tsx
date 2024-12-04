@@ -1,0 +1,42 @@
+import { SecondaryButton } from "@/components/custom-ui/secondary-button";
+import { Text } from "@/components/custom-ui/text";
+import { RecipeCard } from "@/components/recipes/recipe-card";
+import { Recipe } from "@/types/recipe";
+import Link from "next/link";
+
+interface LatestRecipesSectionProps {
+  recipes: Recipe[];
+}
+
+export function LatestRecipesSection({ recipes }: LatestRecipesSectionProps) {
+  return (
+    <section className="w-full py-16 md:py-20 px-0 lg:px-10">
+      <div className="container mx-auto px-6">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-12">
+          <Text variant="h2">Browse our latest recipes</Text>
+          <Link href="/recipes">
+            <SecondaryButton>Browse All Recipes</SecondaryButton>
+          </Link>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+          {recipes?.map((recipe) => (
+            <RecipeCard
+              key={recipe._id}
+              slug={recipe.slug}
+              title={recipe.title}
+              description={recipe.description}
+              tag={recipe.categories[0]?.title}
+              serving={recipe.servings}
+              prepTime={recipe.prepTime}
+              difficulty={recipe.difficulty}
+              image={recipe.mainImage.asset.url}
+              imageAlt={recipe.mainImage.alt || recipe.title}
+              priority={false}
+            />
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
