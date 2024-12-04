@@ -8,10 +8,12 @@ import Slider from "react-slick";
 
 interface FeaturedRecipesSectionProps {
   recipes: Recipe[];
+  isLoading: boolean;
 }
 
 export function FeaturedRecipesSection({
   recipes,
+  isLoading,
 }: FeaturedRecipesSectionProps) {
   const { setSlider, next, prev } = useSlider();
 
@@ -43,50 +45,67 @@ export function FeaturedRecipesSection({
 
         {/* Slick Carousel */}
         <div className="relative" dir="rtl">
-          <Slider
-            ref={(c) => setSlider(c)}
-            infinite={true}
-            speed={500}
-            slidesToShow={2.5}
-            slidesToScroll={1}
-            arrows={false}
-            rtl={true}
-            responsive={[
-              {
-                breakpoint: 768,
-                settings: {
-                  slidesToShow: 1.5,
-                  slidesToScroll: 1,
-                  centerMode: true,
-                  centerPadding: "40px",
+          {isLoading ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[...Array(3)].map((_, index) => (
+                <div
+                  key={index}
+                  className="aspect-[4/3] rounded-lg overflow-hidden"
+                >
+                  <div className="w-full h-full bg-gray-200 animate-pulse" />
+                  <div className="p-6">
+                    <div className="h-4 w-24 bg-gray-200 animate-pulse mb-4" />
+                    <div className="h-6 w-3/4 bg-gray-200 animate-pulse mb-2" />
+                    <div className="h-4 w-full bg-gray-200 animate-pulse" />
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
+            <Slider
+              ref={(c) => setSlider(c)}
+              infinite={true}
+              speed={500}
+              slidesToShow={2.5}
+              slidesToScroll={1}
+              arrows={false}
+              rtl={true}
+              responsive={[
+                {
+                  breakpoint: 768,
+                  settings: {
+                    slidesToShow: 1.5,
+                    slidesToScroll: 1,
+                    centerMode: true,
+                    centerPadding: "40px",
+                  },
                 },
-              },
-              {
-                breakpoint: 480,
-                settings: {
-                  slidesToShow: 1,
-                  slidesToScroll: 1,
+                {
+                  breakpoint: 480,
+                  settings: {
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                  },
                 },
-              },
-            ]}
-          >
-            {recipes?.map((recipe) => (
-              <div key={recipe._id} className="md:px-3" dir="ltr">
-                <FeaturedRecipeCard
-                  slug={recipe.slug}
-                  title={recipe.title}
-                  description={recipe.description}
-                  tag={recipe.categories[0]?.title}
-                  prepTime={recipe.prepTime}
-                  serving={recipe.servings}
-                  difficulty={recipe.difficulty}
-                  image={recipe.mainImage.asset.url}
-                  imageAlt={recipe.mainImage.alt}
-                />
-              </div>
-            ))}
-          </Slider>
-
+              ]}
+            >
+              {recipes?.map((recipe) => (
+                <div key={recipe._id} className="md:px-3" dir="ltr">
+                  <FeaturedRecipeCard
+                    slug={recipe.slug}
+                    title={recipe.title}
+                    description={recipe.description}
+                    tag={recipe.categories[0]?.title}
+                    prepTime={recipe.prepTime}
+                    serving={recipe.servings}
+                    difficulty={recipe.difficulty}
+                    image={recipe.mainImage.asset.url}
+                    imageAlt={recipe.mainImage.alt}
+                  />
+                </div>
+              ))}
+            </Slider>
+          )}
           {/* Mobile Navigation */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-[150%] flex gap-56 sm:hidden z-10">
             <button

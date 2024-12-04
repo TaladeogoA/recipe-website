@@ -48,9 +48,12 @@ export default function Home() {
   const y1 = useTransform(scrollYProgress, [0, 1], ["10px", "-70%"]);
   const y2 = useTransform(scrollYProgress, [0, 1], ["20px", "-45%"]);
 
-  const { data: categories } = useRecipeCategories();
-  const { data: featuredRecipes } = useFeaturedRecipes();
-  const { data: latestRecipes } = useLatestRecipes();
+  const { data: categories, isLoading: categoriesLoading } =
+    useRecipeCategories();
+  const { data: featuredRecipes, isLoading: isFeaturedLoading } =
+    useFeaturedRecipes();
+  const { data: latestRecipes, isLoading: isLatestLoading } =
+    useLatestRecipes();
 
   const scrollToFeatured = () => {
     document.getElementById("featured-recipes")?.scrollIntoView({
@@ -65,16 +68,25 @@ export default function Home() {
       </Suspense>
 
       <Suspense fallback={<CategoriesSkeleton />}>
-        <CategoriesSection categories={categories || []} />
+        <CategoriesSection
+          categories={categories || []}
+          isLoading={categoriesLoading}
+        />
       </Suspense>
 
       <Suspense fallback={<FeaturedRecipesSkeleton />}>
-        <FeaturedRecipesSection recipes={featuredRecipes || []} />
+        <FeaturedRecipesSection
+          recipes={featuredRecipes || []}
+          isLoading={isFeaturedLoading}
+        />
       </Suspense>
 
       {/* Secondary content with lazy loading */}
       <Suspense fallback={<LatestRecipesSkeleton />}>
-        <LatestRecipesSection recipes={latestRecipes || []} />
+        <LatestRecipesSection
+          recipes={latestRecipes || []}
+          isLoading={isLatestLoading}
+        />
       </Suspense>
 
       <Suspense fallback={<ChefSectionSkeleton />}>
