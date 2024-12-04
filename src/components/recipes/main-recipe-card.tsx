@@ -4,6 +4,7 @@ import ServingIcon from "@/assets/icons/servings.svg";
 import { Card } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
+import { OptimizedImage } from "../common/OptimizedImage";
 import { Text } from "../custom-ui/text";
 import { AspectBox, Flex } from "../layouts";
 import { RecipeTag } from "./recipe-tag";
@@ -40,11 +41,12 @@ const MainRecipeCard = ({
           {/* Image Container */}
           <div className="w-full md:w-[60%] relative">
             <AspectBox ratio="wide" className="relative w-full h-full">
-              <Image
+              <OptimizedImage
                 src={image}
                 alt={imageAlt ? imageAlt : title}
                 fill
-                className="object-cover transition-transform duration-300 ease-in-out group-hover/card:scale-110"
+                priority
+                className="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover/card:scale-105"
               />
             </AspectBox>
             <RecipeTag tag={tag} />

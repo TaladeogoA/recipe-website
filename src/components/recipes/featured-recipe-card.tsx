@@ -4,6 +4,7 @@ import ServingIcon from "@/assets/icons/servings.svg";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
+import { OptimizedImage } from "../common/OptimizedImage";
 import { Text } from "../custom-ui/text";
 import { AspectBox, Flex } from "../layouts";
 import { RecipeTag } from "./recipe-tag";
@@ -46,11 +47,12 @@ export function FeaturedRecipeCard({
           ratio="wide"
           className="overflow-hidden h-[57%] md:h-[40%] xl:h-[57%]"
         >
-          <Image
+          <OptimizedImage
             src={image}
             alt={imageAlt ? imageAlt : title}
             width={1200}
             height={800}
+            priority={true}
             className="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover/card:scale-110"
           />
         </AspectBox>

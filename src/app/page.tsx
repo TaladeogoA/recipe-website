@@ -9,6 +9,7 @@ import InstaFour from "@/assets/images/insta-four.jpg";
 import InstaOne from "@/assets/images/insta-one.jpg";
 import InstaThree from "@/assets/images/insta-three.jpg";
 import InstaTwo from "@/assets/images/insta-two.jpg";
+import { OptimizedImage } from "@/components/common/OptimizedImage";
 import { PrimaryButton } from "@/components/custom-ui/primary-button";
 import { SecondaryButton } from "@/components/custom-ui/secondary-button";
 import { Text } from "@/components/custom-ui/text";
@@ -19,7 +20,6 @@ import { HomeSkeleton } from "@/components/skeletons/home-skeleton";
 import { useRecipeCategories } from "@/hooks/useRecipeCategories";
 import { useFeaturedRecipes, useLatestRecipes } from "@/hooks/useRecipes";
 import { motion, useScroll, useTransform } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import {
@@ -41,8 +41,8 @@ export default function Home() {
   const [slider, setSlider] = useState<Slider | null>(null);
   const { scrollYProgress } = useScroll();
 
-  const y1 = useTransform(scrollYProgress, [0, 1], ["10px", "-30%"]);
-  const y2 = useTransform(scrollYProgress, [0, 1], ["20px", "-15%"]);
+  const y1 = useTransform(scrollYProgress, [0, 1], ["10px", "-70%"]);
+  const y2 = useTransform(scrollYProgress, [0, 1], ["20px", "-45%"]);
 
   const { data: categories, isLoading } = useRecipeCategories();
   const { data: featuredRecipes, isLoading: isFeaturedLoading } =
@@ -62,6 +62,7 @@ export default function Home() {
 
   return (
     <Page>
+      {/* Hero Section */}
       <Flex
         className="w-full min-h-screen h-full flex-col md:flex-row bg-white"
         align="stretch"
@@ -86,46 +87,76 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Desktop Hero Images */}
         <div className="w-full gap-5 overflow-hidden relative left-0 right-0 md:flex hidden">
           <motion.div className="flex flex-col gap-5 flex-1" style={{ y: y1 }}>
             <AspectBox ratio="landscape" className="relative w-full">
-              <Image src={HeroOne} alt="" fill className="object-cover" />
+              <OptimizedImage
+                src={HeroOne}
+                alt="Hero image 1"
+                fill
+                priority
+                className="object-cover"
+              />
             </AspectBox>
             <AspectBox ratio="landscape" className="relative w-full">
-              <Image src={HeroTwo} alt="" fill className="object-cover" />
+              <OptimizedImage
+                src={HeroTwo}
+                alt="Hero image 2"
+                fill
+                priority
+                className="object-cover"
+              />
             </AspectBox>
           </motion.div>
 
           <motion.div className="flex flex-col gap-5 flex-1" style={{ y: y2 }}>
             <AspectBox ratio="landscape" className="relative w-full">
-              <Image src={HeroThree} alt="" fill className="object-cover" />
+              <OptimizedImage
+                src={HeroThree}
+                alt="Hero image 3"
+                fill
+                priority
+                className="object-cover"
+              />
             </AspectBox>
             <AspectBox ratio="landscape" className="relative w-full">
-              <Image src={HeroFour} alt="" fill className="object-cover" />
+              <OptimizedImage
+                src={HeroFour}
+                alt="Hero image 4"
+                fill
+                priority
+                className="object-cover"
+              />
             </AspectBox>
           </motion.div>
         </div>
 
+        {/* Mobile Hero Images */}
         <div className="w-full md:hidden">
           <div className="grid grid-cols-2 gap-5">
-            <AspectBox ratio="landscape" className="relative w-full">
-              <Image src={HeroOne} alt="" fill className="object-cover" />
-            </AspectBox>
-            <AspectBox ratio="landscape" className="relative w-full">
-              <Image src={HeroTwo} alt="" fill className="object-cover" />
-            </AspectBox>
-            <AspectBox ratio="landscape" className="relative w-full">
-              <Image src={HeroThree} alt="" fill className="object-cover" />
-            </AspectBox>
-            <AspectBox ratio="landscape" className="relative w-full">
-              <Image src={HeroFour} alt="" fill className="object-cover" />
-            </AspectBox>
+            {[HeroOne, HeroTwo, HeroThree, HeroFour].map((image, index) => (
+              <AspectBox
+                key={index}
+                ratio="landscape"
+                className="relative w-full"
+              >
+                <OptimizedImage
+                  src={image}
+                  alt={`Hero image ${index + 1}`}
+                  fill
+                  priority={index < 2}
+                  className="object-cover"
+                />
+              </AspectBox>
+            ))}
           </div>
         </div>
 
         <div className="absolute right-0 top-0 w-1/2 h-screen -z-10 bg-brand-light md:block hidden"></div>
       </Flex>
 
+      {/* Categories Section */}
       <section className="w-full pt-10 pb-20 mt-10 px-0 lg:px-10">
         <div className="container mx-auto px-6">
           <Text variant="h2" className="text-center mb-12">
@@ -141,7 +172,7 @@ export default function Home() {
               >
                 <div className="flex flex-col items-center text-center">
                   <div className="w-40 h-40 bg-brand-light rounded-lg mb-4 flex items-center justify-center group-hover:bg-brand-light/80 transition-colors">
-                    <Image
+                    <OptimizedImage
                       src={category.icon}
                       alt={category.title}
                       width={96}
@@ -192,7 +223,7 @@ export default function Home() {
               ref={(c) => setSlider(c)}
               infinite={true}
               speed={500}
-              slidesToShow={2.7}
+              slidesToShow={2.5}
               slidesToScroll={1}
               arrows={false}
               rtl={true}
@@ -273,22 +304,25 @@ export default function Home() {
                 difficulty={recipe.difficulty}
                 image={recipe.mainImage.asset.url}
                 imageAlt={recipe.mainImage.alt || recipe.title}
+                priority={false}
               />
             ))}
           </div>
         </div>
       </section>
 
+      {/* Chef Section */}
       <section className="w-full bg-grey-100 py-20 px-0 lg:px-10">
         <div className="container mx-auto px-6">
           <div className="flex flex-col md:flex-row gap-10">
             {/* Left Container - Image & Overlay */}
             <div className="w-full md:w-[60%] relative">
               <AspectBox ratio="portrait" className="relative w-full">
-                <Image
+                <OptimizedImage
                   src={ChefImg}
                   alt="Sarah Mitchell"
                   fill
+                  priority
                   className="object-cover"
                 />
               </AspectBox>
@@ -391,6 +425,7 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Instagram Section */}
       <section className="w-full py-16 px-0 lg:px-10 md:py-20">
         <div className="container mx-auto">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-12">
@@ -399,61 +434,25 @@ export default function Home() {
           </div>
 
           <div className="flex flex-wrap gap-4 justify-center">
-            <AspectBox
-              ratio="square"
-              className="w-[calc(50%-8px)] sm:w-40 xl:w-56"
-            >
-              <Image
-                src={InstaOne}
-                alt="Instagram post 1"
-                fill
-                className="object-cover"
-              />
-            </AspectBox>
-            <AspectBox
-              ratio="square"
-              className="w-[calc(50%-8px)] sm:w-40 xl:w-56"
-            >
-              <Image
-                src={InstaTwo}
-                alt="Instagram post 2"
-                fill
-                className="object-cover"
-              />
-            </AspectBox>
-            <AspectBox
-              ratio="square"
-              className="w-[calc(50%-8px)] sm:w-40 xl:w-56"
-            >
-              <Image
-                src={InstaThree}
-                alt="Instagram post 3"
-                fill
-                className="object-cover"
-              />
-            </AspectBox>
-            <AspectBox
-              ratio="square"
-              className="w-[calc(50%-8px)] sm:w-40 xl:w-56"
-            >
-              <Image
-                src={InstaFour}
-                alt="Instagram post 4"
-                fill
-                className="object-cover"
-              />
-            </AspectBox>
-            <AspectBox
-              ratio="square"
-              className="w-[calc(50%-8px)] sm:w-40 xl:w-56 hidden sm:block"
-            >
-              <Image
-                src={InstaFive}
-                alt="Instagram post 5"
-                fill
-                className="object-cover"
-              />
-            </AspectBox>
+            {[InstaOne, InstaTwo, InstaThree, InstaFour, InstaFive].map(
+              (image, index) => (
+                <AspectBox
+                  key={index}
+                  ratio="square"
+                  className={`w-[calc(50%-8px)] sm:w-40 xl:w-56 ${
+                    index === 4 ? "hidden sm:block" : ""
+                  }`}
+                >
+                  <OptimizedImage
+                    src={image}
+                    alt={`Instagram post ${index + 1}`}
+                    fill
+                    priority={false}
+                    className="object-cover"
+                  />
+                </AspectBox>
+              )
+            )}
           </div>
         </div>
       </section>

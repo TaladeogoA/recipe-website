@@ -13,11 +13,11 @@ import EmmaSrc from "@/assets/images/reviews/emma.jpg";
 import JamesSrc from "@/assets/images/reviews/james.jpg";
 import MarcoSrc from "@/assets/images/reviews/marco.jpg";
 import MayaSrc from "@/assets/images/reviews/maya.jpg";
+import { OptimizedImage } from "@/components/common/OptimizedImage";
 import { SecondaryButton } from "@/components/custom-ui/secondary-button";
 import { Text } from "@/components/custom-ui/text";
 import { AspectBox, Page } from "@/components/layouts";
 import { ReviewCard } from "@/components/reviews/review-card";
-import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -48,22 +48,35 @@ const AboutPage = () => {
       <section className="min-h-screen w-full flex flex-col lg:flex-row gap-6 lg:gap-10 mt-20 lg:mt-36 px-6 lg:px-20">
         <div className="w-full lg:w-[50%] flex flex-col gap-6 lg:gap-10 lg:mt-24">
           <AspectBox className="h-[300px] lg:h-[35%]">
-            <Image src={HeroOne} fill className="object-cover" alt="" />
+            <OptimizedImage
+              src={HeroOne}
+              alt="Kitchen preparation scene"
+              fill
+              priority
+              className="object-cover"
+            />
           </AspectBox>
 
           <AspectBox className="hidden lg:block h-[300px] lg:flex-grow">
-            <Image
+            <OptimizedImage
               src={HeroThree}
+              alt="Cooking ingredients display"
               fill
+              priority
               className="object-cover pl-0 lg:pl-24"
-              alt=""
             />
           </AspectBox>
         </div>
 
         <div className="w-full lg:w-[50%] flex flex-col">
           <AspectBox className="h-[300px] lg:flex-grow">
-            <Image src={HeroTwo} fill className="object-cover" alt="" />
+            <OptimizedImage
+              src={HeroTwo}
+              alt="Cooking process shot"
+              fill
+              priority
+              className="object-cover"
+            />
           </AspectBox>
 
           <div
@@ -112,17 +125,32 @@ const AboutPage = () => {
 
           <div className="block lg:hidden w-full overflow-hidden max-h-full">
             <AspectBox ratio="square" className="relative w-full">
-              <Image src={MainImg} alt="" fill className="object-cover" />
+              <OptimizedImage
+                src={MainImg}
+                alt="Sarah cooking in kitchen"
+                fill
+                className="object-cover"
+              />
             </AspectBox>
           </div>
           <div className="hidden lg:block absolute right-16 top-1/2 -translate-y-1/2 w-[70%]">
             <AspectBox ratio="square" className="relative">
-              <Image src={MainImg} alt="" fill className="object-cover" />
+              <OptimizedImage
+                src={MainImg}
+                alt="Sarah cooking in kitchen"
+                fill
+                className="object-cover"
+              />
             </AspectBox>
           </div>
           <div className="hidden lg:block absolute right-48 bottom-28 translate-y-1/4 w-[50%]">
             <AspectBox ratio="landscape" className="relative">
-              <Image src={OverlapImg} alt="" fill className="object-cover" />
+              <OptimizedImage
+                src={OverlapImg}
+                alt="Cooking detail shot"
+                fill
+                className="object-cover"
+              />
             </AspectBox>
           </div>
         </div>
@@ -329,61 +357,28 @@ const AboutPage = () => {
           </div>
 
           <div className="flex flex-wrap gap-4 justify-center">
-            <AspectBox
-              ratio="square"
-              className="w-[calc(50%-8px)] sm:w-40 xl:w-56"
-            >
-              <Image
-                src={InstaOne}
-                alt="Instagram post 1"
-                fill
-                className="object-cover"
-              />
-            </AspectBox>
-            <AspectBox
-              ratio="square"
-              className="w-[calc(50%-8px)] sm:w-40 xl:w-56"
-            >
-              <Image
-                src={InstaTwo}
-                alt="Instagram post 2"
-                fill
-                className="object-cover"
-              />
-            </AspectBox>
-            <AspectBox
-              ratio="square"
-              className="w-[calc(50%-8px)] sm:w-40 xl:w-56"
-            >
-              <Image
-                src={InstaThree}
-                alt="Instagram post 3"
-                fill
-                className="object-cover"
-              />
-            </AspectBox>
-            <AspectBox
-              ratio="square"
-              className="w-[calc(50%-8px)] sm:w-40 xl:w-56"
-            >
-              <Image
-                src={InstaFour}
-                alt="Instagram post 4"
-                fill
-                className="object-cover"
-              />
-            </AspectBox>
-            <AspectBox
-              ratio="square"
-              className="w-[calc(50%-8px)] sm:w-40 xl:w-56 hidden sm:block"
-            >
-              <Image
-                src={InstaFive}
-                alt="Instagram post 5"
-                fill
-                className="object-cover"
-              />
-            </AspectBox>
+            {[
+              { src: InstaOne, alt: "Instagram post 1" },
+              { src: InstaTwo, alt: "Instagram post 2" },
+              { src: InstaThree, alt: "Instagram post 3" },
+              { src: InstaFour, alt: "Instagram post 4" },
+              { src: InstaFive, alt: "Instagram post 5" },
+            ].map((img, index) => (
+              <AspectBox
+                key={index}
+                ratio="square"
+                className={`w-[calc(50%-8px)] sm:w-40 xl:w-56 ${
+                  index === 4 ? "hidden sm:block" : ""
+                }`}
+              >
+                <OptimizedImage
+                  src={img.src}
+                  alt={img.alt}
+                  fill
+                  className="object-cover"
+                />
+              </AspectBox>
+            ))}
           </div>
         </div>
       </section>

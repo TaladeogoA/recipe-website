@@ -4,6 +4,7 @@ import ServingIcon from "@/assets/icons/servings.svg";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
+import { OptimizedImage } from "../common/OptimizedImage";
 import { Text } from "../custom-ui/text";
 import { AspectBox, Flex } from "../layouts";
 import { RecipeTag } from "./recipe-tag";
@@ -20,6 +21,7 @@ interface RecipeCardProps {
   slug: {
     current: string;
   };
+  priority?: boolean;
 }
 
 export function RecipeCard({
@@ -32,6 +34,7 @@ export function RecipeCard({
   image,
   imageAlt,
   slug,
+  priority = false,
 }: RecipeCardProps) {
   return (
     <Link href={`/recipes/${slug.current}`}>
@@ -46,11 +49,11 @@ export function RecipeCard({
           ratio="wide"
           className="overflow-hidden h-[45%] lg:h-[50%] xl:h-[57%]"
         >
-          <Image
+          <OptimizedImage
             src={image}
-            alt={imageAlt ? imageAlt : title}
-            width={1200}
-            height={800}
+            alt={imageAlt || title}
+            fill
+            priority={priority}
             className="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover/card:scale-110"
           />
         </AspectBox>

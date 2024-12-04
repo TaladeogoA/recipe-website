@@ -3,6 +3,7 @@ import DifficultyIcon from "@/assets/icons/difficulty.svg";
 import PrepIcon from "@/assets/icons/prep-time.svg";
 import ServingIcon from "@/assets/icons/servings.svg";
 import FallbackImg from "@/assets/images/recipes/recipe-placeholder-featured.jpg";
+import { OptimizedImage } from "@/components/common/OptimizedImage";
 import { SecondaryButton } from "@/components/custom-ui/secondary-button";
 import { Text } from "@/components/custom-ui/text";
 import { Page } from "@/components/layouts";
@@ -34,12 +35,12 @@ const SingleRecipePage = () => {
   return (
     <Page className="relative">
       <div className="fixed inset-0 w-full h-[50vh] md:h-[70vh] -z-10">
-        <Image
+        <OptimizedImage
           src={recipe?.mainImage.asset.url ?? FallbackImg}
           alt={recipe?.mainImage.alt || recipe?.title || "Recipe image"}
           fill
-          className="object-cover"
           priority
+          className="object-cover"
         />
       </div>
 

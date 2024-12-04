@@ -47,7 +47,7 @@ function SearchResults() {
                       </div>
                     </div>
                   ))
-                : recipes?.map((recipe) => (
+                : recipes?.map((recipe, index) => (
                     <RecipeCard
                       key={recipe._id}
                       title={recipe.title}
@@ -59,6 +59,7 @@ function SearchResults() {
                       image={recipe.mainImage.asset.url}
                       imageAlt={recipe.mainImage.alt || recipe.title}
                       slug={recipe.slug}
+                      priority={index < 3}
                     />
                   ))}
             </div>

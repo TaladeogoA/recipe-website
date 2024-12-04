@@ -54,7 +54,7 @@ export default function CategoryPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-          {recipesData?.items.map((recipe) => (
+          {recipesData?.items.map((recipe, index) => (
             <RecipeCard
               key={recipe._id}
               slug={recipe.slug}
@@ -66,6 +66,7 @@ export default function CategoryPage() {
               difficulty={recipe.difficulty}
               image={recipe.mainImage.asset.url}
               imageAlt={recipe.mainImage.alt || recipe.title}
+              priority={index < 3}
             />
           ))}
         </div>
