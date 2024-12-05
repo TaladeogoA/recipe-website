@@ -2,6 +2,7 @@ import Footer from "@/components/layouts/footer";
 import Navbar from "@/components/layouts/navbar";
 import type { Metadata } from "next";
 import { DM_Sans } from "next/font/google";
+import "nprogress/nprogress.css";
 import "./globals.css";
 import { Providers } from "./providers";
 
@@ -37,6 +38,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={dmSans.className}>
+      <head>
+        <style>{`
+          #nprogress .bar {
+            background: rgb(129, 212, 137) !important;
+            height: 3px;
+          }
+          #nprogress .peg {
+            box-shadow: 0 0 10px rgb(129, 212, 137), 0 0 5px rgb(129, 212, 137);
+          }
+        `}</style>
+      </head>
       <body>
         <Providers>
           <Navbar />

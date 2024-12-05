@@ -1,5 +1,6 @@
 "use client";
 import LogoImg from "@/assets/images/brand/logo.jpg";
+import { usePageLoadingIndicator } from "@/hooks/usePageLoadingIndicator";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -9,6 +10,7 @@ import { SearchBox } from "../navbar/search-box";
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  usePageLoadingIndicator();
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
