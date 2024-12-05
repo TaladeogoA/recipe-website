@@ -71,35 +71,31 @@ export function RecipeCard({
               <Image
                 src={ServingIcon}
                 alt=""
-                width={20}
-                height={20}
+                width={16}
+                height={16}
                 className="w-4 h-4 md:w-5 md:h-5"
               />
-              <Text className="font-bold text-sm md:text-base">
-                {prepTime} mins
-              </Text>
+              <Text className="font-bold text-sm">{prepTime} mins</Text>
             </Flex>
             <Flex gap="x-small">
               <Image
                 src={PrepIcon}
                 alt=""
-                width={20}
-                height={20}
+                width={16}
+                height={16}
                 className="w-4 h-4 md:w-5 md:h-5"
               />
-              <Text className="text-sm md:text-base">{serving} servings</Text>
+              <Text className="text-sm">{serving} servings</Text>
             </Flex>
             <Flex gap="x-small">
               <Image
                 src={DifficultyIcon}
                 alt=""
-                width={20}
-                height={20}
+                width={16}
+                height={16}
                 className="w-4 h-4 md:w-5 md:h-5"
               />
-              <Text className="capitalize text-sm md:text-base">
-                {difficulty}
-              </Text>
+              <Text className="capitalize text-sm">{difficulty}</Text>
             </Flex>
           </Flex>
         </CardContent>

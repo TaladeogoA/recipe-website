@@ -25,11 +25,21 @@ export function CategoryTabs() {
           <Link
             key={category}
             href={href}
-            className={`px-4 py-2 transition-all lowercase duration-200 ${
-              isActive
-                ? "bg-black text-white"
-                : "bg-white text-black shadow-md hover:shadow-lg"
-            }`}
+            className={`
+              px-4 py-2
+              transition-all duration-200
+              lowercase
+              rounded-sm
+              focus:outline-none
+              focus:ring-2
+              focus:ring-brand-primary
+              focus:ring-offset-2
+              ${
+                isActive
+                  ? "bg-black text-white hover:bg-gray-800"
+                  : "bg-white text-black shadow-md hover:shadow-lg hover:bg-gray-50  hover:transform hover:-translate-y-0.5"
+              }
+            `}
           >
             <Text className="text-sm">{category}</Text>
           </Link>

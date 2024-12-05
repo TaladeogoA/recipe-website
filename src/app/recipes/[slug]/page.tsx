@@ -133,7 +133,7 @@ const SingleRecipePage = () => {
             </div>
           </section>
 
-          <section className="mt-8 md:mt-10 bg-grey-200 px-6 pt-32 xl:px-32">
+          <section className="mt-8 md:mt-10 mb-20 bg-grey-200 px-6 pt-32 xl:px-32">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
               <Text variant="h2">Latest recipes</Text>
               <Link href="/recipes">
