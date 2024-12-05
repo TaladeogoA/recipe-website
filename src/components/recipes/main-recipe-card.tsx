@@ -1,39 +1,34 @@
+"use client";
 import DifficultyIcon from "@/assets/icons/difficulty.svg";
 import PrepIcon from "@/assets/icons/prep-time.svg";
 import ServingIcon from "@/assets/icons/servings.svg";
 import { Card } from "@/components/ui/card";
+import { useFeaturedRecipes } from "@/hooks/useRecipes";
 import Image from "next/image";
 import Link from "next/link";
 import { OptimizedImage } from "../common/OptimizedImage";
 import { Text } from "../custom-ui/text";
 import { AspectBox, Flex } from "../layouts";
+import { FeaturedRecipeSkeleton } from "../skeletons/recipes";
 import { RecipeTag } from "./recipe-tag";
 
-interface MainRecipeCardProps {
-  title: string;
-  description: string;
-  tag: string;
-  serving: number;
-  prepTime: number;
-  difficulty: "easy" | "medium" | "hard";
-  image: string;
-  imageAlt: string;
-  slug: {
-    current: string;
-  };
-}
+const MainRecipeCard = () => {
+  const { data: recipes, isLoading } = useFeaturedRecipes();
 
-const MainRecipeCard = ({
-  title = "Creamy Garlic Parmesan Pasta",
-  description = "A rich and creamy pasta dish made with fresh garlic, parmesan cheese, and herbs.",
-  tag = "main course",
-  serving = 6,
-  prepTime = 60,
-  difficulty = "medium",
-  image,
-  imageAlt,
-  slug,
-}: MainRecipeCardProps) => {
+  if (isLoading) return <FeaturedRecipeSkeleton />;
+  if (!recipes) return null;
+
+  const {
+    slug,
+    title,
+    description,
+    categories,
+    servings,
+    prepTime,
+    difficulty,
+    mainImage,
+  } = recipes[0];
+
   return (
     <Link href={`/recipes/${slug.current}`}>
       <Card className="group/card overflow-hidden rounded-none shadow-recipe border-none">
@@ -42,14 +37,14 @@ const MainRecipeCard = ({
           <div className="w-full md:w-[60%] relative">
             <AspectBox ratio="wide" className="relative w-full h-full">
               <OptimizedImage
-                src={image}
-                alt={imageAlt ? imageAlt : title}
+                src={mainImage.asset.url}
+                alt={mainImage.alt || title}
                 fill
                 priority
                 className="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover/card:scale-105"
               />
             </AspectBox>
-            <RecipeTag tag={tag} />
+            <RecipeTag tag={categories[0]?.title} />
           </div>
 
           {/* Content Container */}
@@ -79,7 +74,9 @@ const MainRecipeCard = ({
                   alt=""
                   className="w-4 h-4 md:w-5 md:h-5"
                 />
-                <Text className="text-sm md:text-base">{serving} servings</Text>
+                <Text className="text-sm md:text-base">
+                  {servings} servings
+                </Text>
               </Flex>
               <Flex gap="x-small">
                 <Image

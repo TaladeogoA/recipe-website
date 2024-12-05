@@ -4,64 +4,53 @@ import { Text } from "@/components/custom-ui/text";
 import { Page } from "@/components/layouts";
 import { CategoryTabs } from "@/components/recipes/category-tabs";
 import MainRecipeCard from "@/components/recipes/main-recipe-card";
-import { RecipeCard } from "@/components/recipes/recipe-card";
-import { RecipesPageSkeleton } from "@/components/skeletons/recipes-page-skeleton";
-import { useFeaturedRecipes, useRecipesByCategory } from "@/hooks/useRecipes";
+import { HeroSection } from "@/components/sections/recipes/hero-section";
+import {
+  FeaturedRecipeSkeleton,
+  HeroSectionSkeleton,
+  RecipesGridSkeleton,
+} from "@/components/skeletons/recipes";
+import { useRecipesByCategory } from "@/hooks/useRecipes";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 
-const RecipesPage = () => {
+const RecipesGrid = dynamic(
+  () =>
+    import("@/components/sections/recipes/recipes-grid").then((mod) => ({
+      default: mod.RecipesGrid,
+    })),
+  {
+    loading: () => <RecipesGridSkeleton />,
+    ssr: false,
+  }
+);
+
+export default function RecipesPage() {
   const [page, setPage] = useState(1);
   const ITEMS_PER_PAGE = 9;
 
   const pathname = usePathname();
   const currentCategory =
     pathname === "/recipes" ? "all" : pathname.split("/").pop() || "all";
-
-  const { data: featuredRecipes, isLoading: featuredLoading } =
-    useFeaturedRecipes();
   const { data: recipesData, isLoading: recipesLoading } = useRecipesByCategory(
     currentCategory,
     page,
     ITEMS_PER_PAGE
   );
-
-  const recipes = recipesData?.items;
   const totalPages = Math.ceil((recipesData?.total || 0) / ITEMS_PER_PAGE);
-
-  if (featuredLoading || recipesLoading) {
-    return <RecipesPageSkeleton />;
-  }
 
   return (
     <Page>
-      <section className="w-full py-16 md:py-20 px-10 md:px-14">
-        <div className="container px-0">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-8 mb-12">
-            <Text variant="h1">Our Recipes</Text>
-            <Text className="text-gray-600 max-w-[550px] md:text-center">
-              Explore our collection of tried and tested recipes, from quick
-              weekday meals to celebratory feasts.
-            </Text>
-          </div>
+      <Suspense fallback={<HeroSectionSkeleton />}>
+        <HeroSection />
+      </Suspense>
 
-          {featuredRecipes?.[0] && (
-            <MainRecipeCard
-              slug={featuredRecipes[0].slug}
-              title={featuredRecipes[0].title}
-              description={featuredRecipes[0].description}
-              tag={featuredRecipes[0].categories[0]?.title}
-              serving={featuredRecipes[0].servings}
-              prepTime={featuredRecipes[0].prepTime}
-              difficulty={featuredRecipes[0].difficulty}
-              image={featuredRecipes[0].mainImage.asset.url}
-              imageAlt={
-                featuredRecipes[0].mainImage.alt || featuredRecipes[0].title
-              }
-            />
-          )}
+      <Suspense fallback={<FeaturedRecipeSkeleton />}>
+        <div className="container px-10 md:px-14">
+          <MainRecipeCard />
         </div>
-      </section>
+      </Suspense>
 
       <section className="py-16 md:py-20 px-10 md:px-14">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 md:gap-8 mb-12">
@@ -69,22 +58,12 @@ const RecipesPage = () => {
           <CategoryTabs />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-          {recipes?.map((recipe) => (
-            <RecipeCard
-              slug={recipe.slug}
-              key={recipe._id}
-              title={recipe.title}
-              description={recipe.description}
-              tag={recipe.categories[0]?.title}
-              serving={recipe.servings}
-              prepTime={recipe.prepTime}
-              difficulty={recipe.difficulty}
-              image={recipe.mainImage.asset.url}
-              imageAlt={recipe.mainImage.alt || recipe.title}
-            />
-          ))}
-        </div>
+        <Suspense fallback={<RecipesGridSkeleton />}>
+          <RecipesGrid
+            recipes={recipesData?.items || []}
+            isLoading={recipesLoading}
+          />
+        </Suspense>
 
         {totalPages > 1 && (
           <div className="flex justify-center mt-12 gap-4">
@@ -110,6 +89,4 @@ const RecipesPage = () => {
       </section>
     </Page>
   );
-};
-
-export default RecipesPage;
+}
