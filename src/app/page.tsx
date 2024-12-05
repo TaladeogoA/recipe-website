@@ -7,10 +7,10 @@ import {
   CategoriesSkeleton,
   ChefSectionSkeleton,
   FeaturedRecipesSkeleton,
-  InstagramSkeleton,
   LatestRecipesSkeleton,
 } from "@/components/skeletons/home";
-import { HomeSkeleton } from "@/components/skeletons/home-skeleton";
+import { HomeSkeleton } from "@/components/skeletons/home/home-skeleton";
+import { InstagramSkeleton } from "@/components/skeletons/shared/instagram-skeleton";
 import { useRecipeCategories } from "@/hooks/useRecipeCategories";
 import { useFeaturedRecipes, useLatestRecipes } from "@/hooks/useRecipes";
 import { useScroll, useTransform } from "framer-motion";
@@ -37,7 +37,7 @@ const ChefSection = dynamic(
 
 const InstagramSection = dynamic(
   () =>
-    import("@/components/sections/home/instagram-section").then((mod) => ({
+    import("@/components/sections/shared/instagram-section").then((mod) => ({
       default: mod.InstagramSection,
     })),
   { ssr: false }
@@ -81,7 +81,6 @@ export default function Home() {
         />
       </Suspense>
 
-      {/* Secondary content with lazy loading */}
       <Suspense fallback={<LatestRecipesSkeleton />}>
         <LatestRecipesSection
           recipes={latestRecipes || []}

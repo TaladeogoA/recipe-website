@@ -1,6 +1,10 @@
-export function InstagramSkeleton() {
+interface InstagramSkeletonProps {
+  className?: string;
+}
+
+export function InstagramSkeleton({ className = "" }: InstagramSkeletonProps) {
   return (
-    <section className="w-full py-16 px-0 lg:px-10 md:py-20">
+    <section className={`w-full py-16 px-0 lg:px-10 md:py-20 ${className}`}>
       <div className="container mx-auto">
         <div className="flex justify-between items-center mb-12">
           <div className="h-10 w-64 bg-gray-200 animate-pulse" />
