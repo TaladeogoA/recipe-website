@@ -2,10 +2,15 @@ import { useRecipeCategories } from "@/hooks/useRecipeCategories";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Text } from "../custom-ui/text";
+import { CategoryTabsSkeleton } from "../skeletons/category";
 
 export function CategoryTabs() {
   const pathname = usePathname();
-  const { data: categories } = useRecipeCategories();
+  const { data: categories, isLoading } = useRecipeCategories();
+
+  if (isLoading) {
+    return <CategoryTabsSkeleton />;
+  }
 
   return (
     <div className="flex flex-row flex-wrap gap-4 justify-end">
