@@ -4,18 +4,25 @@ import PrepIcon from "@/assets/icons/prep-time.svg";
 import ServingIcon from "@/assets/icons/servings.svg";
 import FallbackImg from "@/assets/images/recipes/recipe-placeholder-featured.jpg";
 import { OptimizedImage } from "@/components/common/OptimizedImage";
-import { SecondaryButton } from "@/components/custom-ui/secondary-button";
 import { Text } from "@/components/custom-ui/text";
 import { Page } from "@/components/layouts";
-import { RecipeCard } from "@/components/recipes/recipe-card";
 import { RecipesPageSkeleton } from "@/components/skeletons/recipes-page-skeleton";
-import { Skeleton } from "@/components/ui/skeleton";
+import { RelatedRecipesSkeleton } from "@/components/skeletons/single-recipe";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useLatestRecipes, useRecipe } from "@/hooks/useRecipes";
 import { motion, useScroll, useTransform } from "framer-motion";
+import dynamic from "next/dynamic";
 import Image from "next/image";
-import Link from "next/link";
 import { useParams } from "next/navigation";
+import { Suspense } from "react";
+
+const RelatedRecipes = dynamic(
+  () => import("@/components/sections/single-recipe/related-recipes"),
+  {
+    loading: () => <RelatedRecipesSkeleton />,
+    ssr: false,
+  }
+);
 
 const SingleRecipePage = () => {
   const params = useParams();
@@ -133,38 +140,13 @@ const SingleRecipePage = () => {
             </div>
           </section>
 
-          <section className="mt-8 md:mt-10 mb-20 bg-grey-200 px-6 pt-32 xl:px-32">
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8 md:mb-12">
-              <Text variant="h2">Latest recipes</Text>
-              <Link href="/recipes">
-                <SecondaryButton>Browse All Recipes</SecondaryButton>
-              </Link>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-8">
-              {isLatestLoading
-                ? [...Array(3)].map((_, i) => (
-                    <Skeleton key={i} className="h-[400px] w-full" />
-                  ))
-                : latestRecipes
-                    ?.filter((recipe) => recipe.slug.current !== slug)
-                    .slice(0, 3)
-                    .map((recipe) => (
-                      <RecipeCard
-                        key={recipe._id}
-                        title={recipe.title}
-                        description={recipe.description}
-                        tag={recipe.categories[0]?.title}
-                        serving={recipe.servings}
-                        prepTime={recipe.prepTime}
-                        difficulty={recipe.difficulty}
-                        image={recipe.mainImage.asset.url}
-                        imageAlt={recipe.mainImage.alt || recipe.title}
-                        slug={recipe.slug}
-                      />
-                    ))}
-            </div>
-          </section>
+          <Suspense fallback={<RelatedRecipesSkeleton />}>
+            <RelatedRecipes
+              currentSlug={slug}
+              recipes={latestRecipes}
+              isLoading={isLatestLoading}
+            />
+          </Suspense>
         </div>
       </motion.div>
     </Page>
