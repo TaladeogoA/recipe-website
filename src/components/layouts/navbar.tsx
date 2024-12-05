@@ -2,6 +2,7 @@
 import LogoImg from "@/assets/images/brand/logo.jpg";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Text } from "../custom-ui/text";
 import { SearchBox } from "../navbar/search-box";
@@ -33,28 +34,19 @@ const Navbar = () => {
           {/* Desktop Menu */}
           <ul className="hidden md:flex gap-8">
             <li>
-              <Link
-                href="/"
-                className="text-gray-800 hover:text-brand-primary transition-colors duration-200"
-              >
+              <NavLink href="/">
                 <Text>home</Text>
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
-                href="/about"
-                className="text-gray-800 hover:text-brand-primary transition-colors duration-200"
-              >
+              <NavLink href="/about">
                 <Text>about</Text>
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
-                href="/recipes"
-                className="text-gray-800 hover:text-brand-primary transition-colors duration-200"
-              >
+              <NavLink href="/recipes">
                 <Text>recipes</Text>
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -132,31 +124,31 @@ const Navbar = () => {
           {/* Mobile menu items */}
           <ul className="flex flex-col gap-4 pb-4">
             <li>
-              <Link
+              <NavLink
                 href="/"
-                className="text-gray-800 hover:text-primary block py-2"
+                className="block py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 home
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 href="/about"
-                className="text-gray-800 hover:text-primary block py-2"
+                className="block py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 about
-              </Link>
+              </NavLink>
             </li>
             <li>
-              <Link
+              <NavLink
                 href="/recipes"
-                className="text-gray-800 hover:text-primary block py-2"
+                className="block py-2"
                 onClick={() => setIsMenuOpen(false)}
               >
                 recipes
-              </Link>
+              </NavLink>
             </li>
           </ul>
         </div>
@@ -166,3 +158,34 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+interface NavLinkProps {
+  href: string;
+  children: React.ReactNode;
+  onClick?: () => void;
+  className?: string;
+}
+
+function NavLink({ href, children, onClick, className = "" }: NavLinkProps) {
+  const pathname = usePathname();
+  const isActive =
+    (href === "/" && pathname === "/") ||
+    (href !== "/" && pathname === href) ||
+    (href !== "/" && pathname.startsWith(`${href}/`));
+
+  return (
+    <Link
+      href={href}
+      className={`
+        ${isActive ? "text-brand-primary" : "text-gray-800"}
+        hover:text-brand-primary
+        transition-colors
+        duration-200
+        ${className}
+      `}
+      onClick={onClick}
+    >
+      {children}
+    </Link>
+  );
+}
