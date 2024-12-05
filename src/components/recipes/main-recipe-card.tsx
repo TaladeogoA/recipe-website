@@ -30,7 +30,7 @@ const MainRecipeCard = () => {
   } = recipes[0];
 
   return (
-    <Link href={`/recipes/${slug.current}`}>
+    <Link href={`/recipes/${slug}`}>
       <Card className="group/card overflow-hidden rounded-none shadow-recipe border-none">
         <div className="flex flex-col md:flex-row">
           {/* Image Container */}

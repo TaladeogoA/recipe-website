@@ -18,9 +18,7 @@ interface FeaturedRecipeCardProps {
   difficulty: "easy" | "medium" | "hard";
   image: string;
   imageAlt?: string;
-  slug: {
-    current: string;
-  };
+  slug: string;
 }
 
 export function FeaturedRecipeCard({
@@ -35,18 +33,15 @@ export function FeaturedRecipeCard({
   slug,
 }: FeaturedRecipeCardProps) {
   return (
-    <Link href={`/recipes/${slug.current}`}>
+    <Link href={`/recipes/${slug}`}>
       <Card
-        className="group/card overflow-hidden rounded-none shadow-recipe border-none h-[80vh]
-    transition-all duration-300 ease-in-out
-    hover:scale-90 relative"
+        className="group/card overflow-hidden rounded-none shadow-recipe border-none
+      max-h-max transition-all duration-300 ease-in-out
+      hover:scale-90 relative"
       >
         <RecipeTag tag={tag} />
 
-        <AspectBox
-          ratio="wide"
-          className="overflow-hidden h-[57%] md:h-[40%] xl:h-[57%]"
-        >
+        <AspectBox ratio="wide" className="overflow-hidden">
           <OptimizedImage
             src={image}
             alt={imageAlt ? imageAlt : title}
@@ -56,7 +51,7 @@ export function FeaturedRecipeCard({
             className="object-cover w-full h-full transition-transform duration-300 ease-in-out group-hover/card:scale-110"
           />
         </AspectBox>
-        <CardContent className="pt-6 md:pt-14 h-[43%] md:h-[60%] xl:h-[43%]">
+        <CardContent className="pt-6 md:pt-14">
           <div className="w-[20%] h-[2px] bg-brand-primary mb-2 transition-all duration-300 ease-in-out group-hover/card:w-[45%]" />
           <Text variant="h3" className="mb-2">
             {title}

@@ -1,6 +1,6 @@
-import { OptimizedImage } from "@/components/common/OptimizedImage";
 import { Text } from "@/components/custom-ui/text";
 import { RecipeCategory } from "@/types/recipe";
+import Image from "next/image";
 import Link from "next/link";
 
 interface CategoriesSectionProps {
@@ -36,18 +36,20 @@ export function CategoriesSection({
                 ))
             : categories?.slice(0, 4).map((category) => (
                 <Link
-                  href={`/categories/${category.slug.current}`}
+                  href={`/categories/${category.slug}`}
                   key={category._id}
                   className="group hover:scale-95 transition-transform duration-200"
                 >
                   <div className="flex flex-col items-center text-center">
                     <div className="w-40 h-40 bg-brand-light rounded-lg mb-4 flex items-center justify-center group-hover:bg-brand-light/80 transition-colors">
-                      <OptimizedImage
+                      <Image
                         src={category.icon}
                         alt={category.title}
                         width={96}
                         height={96}
                         className="text-brand-primary"
+                        unoptimized={category.icon.endsWith(".svg")}
+                        priority={false}
                       />
                     </div>
                     <div className="h-[2px] bg-brand-primary w-12 mt-6 mb-4" />

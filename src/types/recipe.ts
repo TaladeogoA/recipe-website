@@ -1,10 +1,7 @@
 export interface RecipeCategory {
   _id: string;
   title: string;
-  slug: {
-    current: string;
-    _type: string;
-  };
+  slug: string;
   description: string;
   icon: string;
 }
@@ -12,9 +9,7 @@ export interface RecipeCategory {
 export interface Recipe {
   _id: string;
   title: string;
-  slug: {
-    current: string;
-  };
+  slug: string;
   description: string;
   mainImage: {
     asset: {
