@@ -1,11 +1,9 @@
-// src/hooks/usePageLoadingIndicator.ts
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname } from "next/navigation";
 import NProgress from "nprogress";
 import { useCallback, useEffect, useRef } from "react";
 
 export function usePageLoadingIndicator() {
   const pathname = usePathname();
-  const searchParams = useSearchParams();
   const isNavigatingRef = useRef(false);
 
   const handleStart = useCallback(() => {
@@ -33,8 +31,14 @@ export function usePageLoadingIndicator() {
   useEffect(() => {
     const handleLinkClick = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      const isLink = target.tagName === "A" || target.closest("a");
-      if (isLink) handleStart();
+      const link = target.closest("a");
+      if (
+        link?.href &&
+        !link.target &&
+        link.origin === window.location.origin
+      ) {
+        handleStart();
+      }
     };
 
     document.addEventListener("mousedown", handleLinkClick);
@@ -45,15 +49,12 @@ export function usePageLoadingIndicator() {
   }, [handleStart, handleComplete]);
 
   useEffect(() => {
-    if (!isNavigatingRef.current) {
-      handleStart();
-    }
-
+    handleStart();
     const timer = setTimeout(handleComplete, 500);
 
     return () => {
       clearTimeout(timer);
       handleComplete();
     };
-  }, [pathname, searchParams, handleStart, handleComplete]);
+  }, [pathname, handleStart, handleComplete]);
 }
