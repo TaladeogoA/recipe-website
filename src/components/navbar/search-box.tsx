@@ -75,7 +75,7 @@ export function SearchBox() {
               key={recipe._id}
               className="w-full text-left px-4 py-2 hover:bg-gray-100"
               onClick={() => {
-                router.push(`/recipes/${recipe.slug.current}`);
+                router.push(`/recipes/${recipe.slug}`);
                 setIsOpen(false);
                 setQuery("");
               }}

@@ -29,7 +29,7 @@ const RelatedRecipes = ({
 
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-8">
         {recipes
-          ?.filter((recipe) => recipe.slug.current !== currentSlug)
+          ?.filter((recipe) => recipe.slug !== currentSlug)
           .slice(0, 3)
           .map((recipe) => (
             <RecipeCard
