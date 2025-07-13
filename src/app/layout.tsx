@@ -39,6 +39,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={dmSans.className}>
       <head>
+        <link rel="manifest" href="/manifest.json" />
+        <meta name="theme-color" content="#81d489" />
         <style>{`
           #nprogress .bar {
             background: rgb(129, 212, 137) !important;
