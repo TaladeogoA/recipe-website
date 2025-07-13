@@ -27,7 +27,7 @@ const Navbar = () => {
               src={LogoImg}
               height={50}
               width={50}
-              alt="Gather"
+              alt="Gather Logo"
               className="object-cover"
             />
             Gather
@@ -63,17 +63,17 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             className="md:hidden p-3 bg-black hover:bg-brand-primary transition-colors duration-200 w-12 h-12 flex items-center justify-center"
+            aria-label="Toggle Menu"
             onClick={toggleMenu}
           >
             <div className="relative w-6 h-6">
               {/* Menu Icon */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className={`h-6 w-6 text-white absolute inset-0 transition-all duration-300 ${
-                  isMenuOpen
-                    ? "opacity-0 rotate-180 scale-0"
-                    : "opacity-100 rotate-0 scale-100"
-                }`}
+                className={`h-6 w-6 text-white absolute inset-0 transition-all duration-300 ${isMenuOpen
+                  ? "opacity-0 rotate-180 scale-0"
+                  : "opacity-100 rotate-0 scale-100"
+                  }`}
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -89,11 +89,10 @@ const Navbar = () => {
               {/* Close Icon */}
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className={`h-6 w-6 text-white absolute inset-0 transition-all duration-300 ${
-                  isMenuOpen
-                    ? "opacity-100 rotate-0 scale-100"
-                    : "opacity-0 rotate-180 scale-0"
-                }`}
+                className={`h-6 w-6 text-white absolute inset-0 transition-all duration-300 ${isMenuOpen
+                  ? "opacity-100 rotate-0 scale-100"
+                  : "opacity-0 rotate-180 scale-0"
+                  }`}
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -112,11 +111,10 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden absolute left-0 right-0 top-full bg-white shadow-lg transition-all duration-300 ease-in-out ${
-          isMenuOpen
-            ? "opacity-100 translate-y-0"
-            : "opacity-0 -translate-y-5 pointer-events-none"
-        }`}
+        className={`md:hidden absolute left-0 right-0 top-full bg-white shadow-lg transition-all duration-300 ease-in-out ${isMenuOpen
+          ? "opacity-100 translate-y-0"
+          : "opacity-0 -translate-y-5 pointer-events-none"
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4">
           {/* Mobile Search */}

@@ -39,7 +39,7 @@ export function RecipeCard({
       <Card
         className="group/card overflow-hidden rounded-none shadow-recipe border-none xl:h-[80vh]
         transition-all duration-300 ease-in-out
-        hover:scale-90 relative"
+        hover:scale-95 relative"
       >
         <RecipeTag tag={tag} />
 

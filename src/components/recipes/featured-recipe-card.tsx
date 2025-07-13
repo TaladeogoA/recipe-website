@@ -19,6 +19,7 @@ interface FeaturedRecipeCardProps {
   image: string;
   imageAlt?: string;
   slug: string;
+  isFocusable?: boolean;
 }
 
 export function FeaturedRecipeCard({
@@ -31,20 +32,26 @@ export function FeaturedRecipeCard({
   image,
   imageAlt,
   slug,
+  isFocusable = true,
 }: FeaturedRecipeCardProps) {
   return (
-    <Link href={`/recipes/${slug}`}>
+    <Link
+      href={`/recipes/${slug}`}
+      tabIndex={isFocusable ? 0 : -1}
+      aria-hidden={isFocusable ? undefined : "true"}
+      aria-label={`View recipe for ${title}`}
+    >
       <Card
         className="group/card overflow-hidden rounded-none shadow-recipe border-none
       max-h-max transition-all duration-300 ease-in-out
-      hover:scale-90 relative"
+      hover:scale-95 relative"
       >
         <RecipeTag tag={tag} />
 
         <AspectBox ratio="wide" className="overflow-hidden">
           <OptimizedImage
             src={image}
-            alt={imageAlt ? imageAlt : title}
+            alt={imageAlt ? imageAlt : `${title} image`}
             width={1200}
             height={800}
             priority={true}
@@ -64,7 +71,7 @@ export function FeaturedRecipeCard({
             <Flex gap="x-small">
               <Image
                 src={ServingIcon}
-                alt=""
+                alt="servings"
                 width={20}
                 height={20}
                 className="w-4 h-4 md:w-5 md:h-5"
@@ -76,7 +83,7 @@ export function FeaturedRecipeCard({
             <Flex gap="x-small">
               <Image
                 src={PrepIcon}
-                alt=""
+                alt="prep time"
                 width={20}
                 height={20}
                 className="w-4 h-4 md:w-5 md:h-5"
@@ -86,7 +93,7 @@ export function FeaturedRecipeCard({
             <Flex gap="x-small">
               <Image
                 src={DifficultyIcon}
-                alt=""
+                alt="difficulty"
                 width={20}
                 height={20}
                 className="w-4 h-4 md:w-5 md:h-5"

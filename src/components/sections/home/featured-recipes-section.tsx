@@ -3,6 +3,7 @@ import { Text } from "@/components/custom-ui/text";
 import { FeaturedRecipeCard } from "@/components/recipes/featured-recipe-card";
 import { useSlider } from "@/hooks/useSlider";
 import { Recipe } from "@/types/recipe";
+import { useState } from "react";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import Slider from "react-slick";
 
@@ -16,6 +17,12 @@ export function FeaturedRecipesSection({
   isLoading,
 }: FeaturedRecipesSectionProps) {
   const { setSlider, next, prev } = useSlider();
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  // For accessibility, allow focus on visible slides only
+  const getVisibleIndexes = () => {
+    return [currentSlide, currentSlide + 1];
+  };
 
   return (
     <section
@@ -27,10 +34,10 @@ export function FeaturedRecipesSection({
         <div className="hidden sm:flex sm:flex-row sm:items-center sm:justify-between gap-4 mb-12">
           <Text variant="h2">Browse our featured recipes</Text>
           <div className="flex gap-4">
-            <SecondaryButton onClick={prev}>
+            <SecondaryButton onClick={prev} aria-label="Previous Recipe">
               <FaChevronLeft />
             </SecondaryButton>
-            <SecondaryButton onClick={next}>
+            <SecondaryButton onClick={next} aria-label="Next Recipe">
               <FaChevronRight />
             </SecondaryButton>
           </div>
@@ -70,6 +77,7 @@ export function FeaturedRecipesSection({
               slidesToScroll={1}
               arrows={false}
               rtl={true}
+              afterChange={setCurrentSlide}
               responsive={[
                 {
                   breakpoint: 768,
@@ -89,7 +97,7 @@ export function FeaturedRecipesSection({
                 },
               ]}
             >
-              {recipes?.map((recipe) => (
+              {recipes?.map((recipe, idx) => (
                 <div key={recipe._id} className="md:px-3" dir="ltr">
                   <FeaturedRecipeCard
                     slug={recipe.slug}
@@ -101,6 +109,7 @@ export function FeaturedRecipesSection({
                     difficulty={recipe.difficulty}
                     image={recipe.mainImage.asset.url}
                     imageAlt={recipe.mainImage.alt}
+                    isFocusable={getVisibleIndexes().includes(idx)}
                   />
                 </div>
               ))}
@@ -111,12 +120,14 @@ export function FeaturedRecipesSection({
             <button
               onClick={prev}
               className="p-3 bg-black hover:bg-brand-primary transition-colors duration-200 w-12 h-12 flex items-center justify-center"
+              aria-label="Previous Recipe"
             >
               <FaChevronLeft className="w-5 h-5 text-white transition-colors duration-200 hover:text-black" />
             </button>
             <button
               onClick={next}
               className="p-3 bg-black hover:bg-brand-primary transition-colors duration-200 w-12 h-12 flex items-center justify-center"
+              aria-label="Next Recipe"
             >
               <FaChevronRight className="w-5 h-5 text-white transition-colors duration-200 hover:text-black" />
             </button>

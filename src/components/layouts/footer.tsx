@@ -15,7 +15,7 @@ const Footer = () => {
                   src={LogoImg}
                   height={50}
                   width={50}
-                  alt="Gather"
+                  alt="Gather Logo"
                   className="object-cover"
                 />
                 <span className="text-2xl font-bold text-gray-800">Gather</span>

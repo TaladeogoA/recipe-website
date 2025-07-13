@@ -112,12 +112,14 @@ export function ReviewsSection({
             <button
               onClick={() => reviewSlider?.slickPrev()}
               className="p-3 bg-black hover:bg-brand-primary transition-colors duration-200 w-12 h-12 flex items-center justify-center"
+              aria-label="Previous Review"
             >
               <FaChevronLeft className="w-5 h-5 text-white transition-colors duration-200 hover:text-black" />
             </button>
             <button
               onClick={() => reviewSlider?.slickNext()}
               className="p-3 bg-black hover:bg-brand-primary transition-colors duration-200 w-12 h-12 flex items-center justify-center"
+              aria-label="Next Review"
             >
               <FaChevronRight className="w-5 h-5 text-white transition-colors duration-200 hover:text-black" />
             </button>

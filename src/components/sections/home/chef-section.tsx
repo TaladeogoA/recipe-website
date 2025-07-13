@@ -43,32 +43,30 @@ export function ChefSection() {
                 <Link
                   href="#"
                   className="w-10 h-10 rounded-full bg-black flex items-center justify-center"
+                  aria-label="Instagram"
                 >
                   <FaInstagram className="w-5 h-5 text-white" />
                 </Link>
                 <Link
                   href="#"
                   className="w-10 h-10 rounded-full bg-black flex items-center justify-center"
+                  aria-label="YouTube"
                 >
                   <FaYoutube className="w-5 h-5 text-white" />
                 </Link>
                 <Link
                   href="#"
                   className="w-10 h-10 rounded-full bg-black flex items-center justify-center"
+                  aria-label="Twitter"
                 >
                   <FaTwitter className="w-5 h-5 text-white" />
                 </Link>
                 <Link
                   href="#"
                   className="w-10 h-10 rounded-full bg-black flex items-center justify-center"
+                  aria-label="Facebook"
                 >
                   <FaFacebook className="w-5 h-5 text-white" />
-                </Link>
-                <Link
-                  href="#"
-                  className="w-10 h-10 rounded-full bg-black flex items-center justify-center"
-                >
-                  <FaTwitter className="w-5 h-5 text-white" />
                 </Link>
               </Flex>
             </div>
