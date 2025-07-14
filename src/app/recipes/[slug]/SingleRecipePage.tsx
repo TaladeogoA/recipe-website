@@ -59,7 +59,7 @@ export default function SingleRecipePage({ recipe, slug }: SingleRecipePageProps
             return window.location.origin + `/recipes/${encodeURIComponent(slug)}`;
         }
         return "";
-    }, []);
+    }, [slug]);
 
     const openShareModal = () => {
         setShareOpen(true);

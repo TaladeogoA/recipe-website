@@ -5,9 +5,10 @@ import SingleRecipePage from "./SingleRecipePage";
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const recipe = await getRecipeBySlug(params.slug);
+  const resolvedParams = await params;
+  const recipe = await getRecipeBySlug(resolvedParams.slug);
 
   if (!recipe) {
     return {
@@ -17,7 +18,7 @@ export async function generateMetadata({
   }
 
   const imageUrl = recipe.mainImage?.asset?.url || "https://yourdomain.com/fallback.jpg";
-  const fullUrl = `https://yourdomain.com/recipes/${params.slug}`;
+  const fullUrl = `https://yourdomain.com/recipes/${resolvedParams.slug}`;
 
   return {
     title: `${recipe.title} | Gather`,
@@ -45,16 +46,13 @@ export async function generateMetadata({
   };
 }
 
-type PageProps = {
-  params: { slug: string };
-};
-
-export default async function Page({ params }: PageProps) {
-  const recipe = await getRecipeBySlug(params.slug);
+export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const recipe = await getRecipeBySlug(resolvedParams.slug);
 
   if (!recipe) {
     return <div>Recipe not found</div>;
   }
 
-  return <SingleRecipePage recipe={recipe} slug={params.slug} />;
+  return <SingleRecipePage recipe={recipe} slug={resolvedParams.slug} />;
 }
