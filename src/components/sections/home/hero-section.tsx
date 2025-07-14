@@ -9,6 +9,7 @@ import { Text } from "@/components/custom-ui/text";
 import { AspectBox, Flex } from "@/components/layouts";
 import { motion, MotionValue } from "framer-motion";
 import Link from "next/link";
+import posthog from "posthog-js";
 
 export function HeroSection({
   y1,
@@ -19,6 +20,12 @@ export function HeroSection({
   y2: MotionValue<string>;
   scrollToFeatured: () => void;
 }) {
+  const handleClick = () => {
+    posthog.capture('clicked_about_chef', {
+      location: 'hero_section',
+    });
+  }
+
   return (
     <Flex
       className="w-full min-h-screen h-full flex-col md:flex-row bg-white"
@@ -38,7 +45,7 @@ export function HeroSection({
           <PrimaryButton onClick={scrollToFeatured}>
             discover recipes
           </PrimaryButton>
-          <Link href="/about">
+          <Link href="/about" onClick={handleClick}>
             <SecondaryButton>about me</SecondaryButton>
           </Link>
         </div>
@@ -110,7 +117,7 @@ export function HeroSection({
         </div>
       </div>
 
-      <div className="absolute right-0 top-0 w-1/2 h-screen -z-10 bg-brand-light md:block hidden"></div>
+      <div className="absolute right-0 top-0 w-1/2 h-screen -z-10 bg-white md:block hidden"></div>
     </Flex>
   );
 }

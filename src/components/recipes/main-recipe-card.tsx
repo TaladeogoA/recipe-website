@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { useFeaturedRecipes } from "@/hooks/useRecipes";
 import Image from "next/image";
 import Link from "next/link";
+import posthog from "posthog-js";
 import { OptimizedImage } from "../common/OptimizedImage";
 import { Text } from "../custom-ui/text";
 import { AspectBox, Flex } from "../layouts";
@@ -29,8 +30,21 @@ const MainRecipeCard = () => {
     mainImage,
   } = recipes[0];
 
+  let categoryTitles = [''];
+  if (categories && categories.length > 0) {
+    categoryTitles = categories.map((cat) => cat.title);
+  }
+
+  const handleClick = () => {
+    posthog.capture('clicked_recipe_card', {
+      recipe_id: slug,
+      category: categoryTitles,
+      title: title,
+    })
+  }
+
   return (
-    <Link href={`/recipes/${slug}`}>
+    <Link href={`/recipes/${slug}`} onClick={handleClick}>
       <Card className="group/card overflow-hidden rounded-none shadow-recipe border-none">
         <div className="flex flex-col md:flex-row">
           {/* Image Container */}

@@ -15,6 +15,7 @@ import { useRecipeCategories } from "@/hooks/useRecipeCategories";
 import { useFeaturedRecipes, useLatestRecipes } from "@/hooks/useRecipes";
 import { useScroll, useTransform } from "framer-motion";
 import dynamic from "next/dynamic";
+import posthog from "posthog-js";
 import { Suspense } from "react";
 import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
@@ -59,6 +60,9 @@ export default function Home() {
     document.getElementById("featured-recipes")?.scrollIntoView({
       behavior: "smooth",
     });
+    posthog.capture('clicked_discover_recipes', {
+      location: 'hero_section',
+    })
   };
 
   return (

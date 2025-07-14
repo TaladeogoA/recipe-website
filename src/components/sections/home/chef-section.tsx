@@ -4,6 +4,7 @@ import { PrimaryButton } from "@/components/custom-ui/primary-button";
 import { Text } from "@/components/custom-ui/text";
 import { AspectBox, Flex } from "@/components/layouts";
 import Link from "next/link";
+import posthog from "posthog-js";
 import {
   FaAward,
   FaFacebook,
@@ -15,6 +16,12 @@ import {
 import { GiOpenBook } from "react-icons/gi";
 
 export function ChefSection() {
+  const handleClick = () => {
+    posthog.capture('clicked_about_chef', {
+      location: 'chef_section',
+    });
+  }
+
   return (
     <section className="w-full bg-grey-100 py-20 px-0 lg:px-10">
       <div className="container mx-auto px-6">
@@ -117,7 +124,7 @@ export function ChefSection() {
               </Flex>
             </div>
 
-            <Link href="/about" className="w-full">
+            <Link href="/about" className="w-full" onClick={handleClick}>
               <PrimaryButton>More About Sarah</PrimaryButton>
             </Link>
           </div>

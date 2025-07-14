@@ -4,6 +4,7 @@ import ServingIcon from "@/assets/icons/servings.svg";
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 import Link from "next/link";
+import posthog from "posthog-js";
 import { OptimizedImage } from "../common/OptimizedImage";
 import { Text } from "../custom-ui/text";
 import { AspectBox, Flex } from "../layouts";
@@ -34,12 +35,21 @@ export function FeaturedRecipeCard({
   slug,
   isFocusable = true,
 }: FeaturedRecipeCardProps) {
+  const handleClick = () => {
+    posthog.capture('clicked_recipe_card', {
+      recipe_id: slug,
+      category: tag,
+      title: title,
+    })
+  }
+
   return (
     <Link
       href={`/recipes/${slug}`}
       tabIndex={isFocusable ? 0 : -1}
       aria-hidden={isFocusable ? undefined : "true"}
       aria-label={`View recipe for ${title}`}
+      onClick={handleClick}
     >
       <Card
         className="group/card overflow-hidden rounded-none shadow-recipe border-none
