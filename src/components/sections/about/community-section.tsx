@@ -31,7 +31,7 @@ export function CommunitySection() {
           <AspectBox ratio="square" className="relative w-full">
             <OptimizedImage
               src={MainImg}
-              alt="Sarah cooking in kitchen"
+              alt="Flat lay of herbs, a lemon half, and a striped cloth on a rustic white wooden table"
               fill
               className="object-cover"
             />
@@ -41,7 +41,7 @@ export function CommunitySection() {
           <AspectBox ratio="square" className="relative">
             <OptimizedImage
               src={MainImg}
-              alt="Sarah cooking in kitchen"
+              alt="Flat lay of herbs, a lemon half, and a striped cloth on a rustic white wooden table"
               fill
               className="object-cover"
             />
@@ -51,7 +51,7 @@ export function CommunitySection() {
           <AspectBox ratio="landscape" className="relative">
             <OptimizedImage
               src={OverlapImg}
-              alt="Cooking detail shot"
+              alt="Top view of a plated fresh salad with greens and crumbled toppings on a white marble surface"
               fill
               className="object-cover"
             />

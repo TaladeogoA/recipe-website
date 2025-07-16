@@ -78,7 +78,7 @@ export function RecipeCard({
             <Flex gap="x-small">
               <Image
                 src={ServingIcon}
-                alt=""
+                alt="Serving size icon"
                 width={16}
                 height={16}
                 className="w-4 h-4 md:w-5 md:h-5"
@@ -88,7 +88,7 @@ export function RecipeCard({
             <Flex gap="x-small">
               <Image
                 src={PrepIcon}
-                alt=""
+                alt="Prep time icon"
                 width={16}
                 height={16}
                 className="w-4 h-4 md:w-5 md:h-5"
@@ -98,7 +98,7 @@ export function RecipeCard({
             <Flex gap="x-small">
               <Image
                 src={DifficultyIcon}
-                alt=""
+                alt="Difficulty level icon"
                 width={16}
                 height={16}
                 className="w-4 h-4 md:w-5 md:h-5"

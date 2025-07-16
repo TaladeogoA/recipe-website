@@ -31,7 +31,7 @@ export function ChefSection() {
             <AspectBox ratio="portrait" className="relative w-full">
               <OptimizedImage
                 src={ChefImg}
-                alt="Sarah Mitchell"
+                alt="Chef Sarah Mitchell piping frosting onto a cake, wearing a white chef's coat, with a focused expression"
                 fill
                 priority
                 className="object-cover"

@@ -57,7 +57,7 @@ export function HeroSection({
           <AspectBox ratio="landscape" className="relative w-full">
             <OptimizedImage
               src={HeroOne}
-              alt="Hero image 1"
+              alt="Person finely chopping fresh parsley on a wooden cutting board, preparing ingredients for a meal"
               fill
               priority
               className="object-cover"
@@ -66,7 +66,7 @@ export function HeroSection({
           <AspectBox ratio="landscape" className="relative w-full">
             <OptimizedImage
               src={HeroTwo}
-              alt="Hero image 2"
+              alt="Close-up of spicy Indian-style curry garnished with chopped spring onions and coconut flakes, served in a traditional bronze bowl"
               fill
               priority
               className="object-cover"
@@ -78,7 +78,7 @@ export function HeroSection({
           <AspectBox ratio="landscape" className="relative w-full">
             <OptimizedImage
               src={HeroThree}
-              alt="Hero image 3"
+              alt="Nigerian grilled whole fish, chicken skewers, and baked jollof rice with red peppers, plated with lemon wedges and tomatoes"
               fill
               priority
               className="object-cover"
@@ -87,7 +87,7 @@ export function HeroSection({
           <AspectBox ratio="landscape" className="relative w-full">
             <OptimizedImage
               src={HeroFour}
-              alt="Hero image 4"
+              alt="Plate of creamy garlic spaghetti topped with chopped parsley and cheese, surrounded by small dishes of spices and oil"
               fill
               priority
               className="object-cover"

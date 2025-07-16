@@ -75,7 +75,7 @@ const MainRecipeCard = () => {
               <Flex gap="x-small">
                 <Image
                   src={PrepIcon}
-                  alt=""
+                  alt="Prep time icon"
                   className="w-4 h-4 md:w-5 md:h-5"
                 />
                 <Text className="font-bold text-sm md:text-base">
@@ -85,7 +85,7 @@ const MainRecipeCard = () => {
               <Flex gap="x-small">
                 <Image
                   src={ServingIcon}
-                  alt=""
+                  alt="Serving size icon"
                   className="w-4 h-4 md:w-5 md:h-5"
                 />
                 <Text className="text-sm md:text-base">
@@ -95,7 +95,7 @@ const MainRecipeCard = () => {
               <Flex gap="x-small">
                 <Image
                   src={DifficultyIcon}
-                  alt=""
+                  alt="Difficulty level icon"
                   className="w-4 h-4 md:w-5 md:h-5"
                 />
                 <Text className="capitalize text-sm md:text-base">

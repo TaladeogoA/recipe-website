@@ -50,6 +50,7 @@ export default function RootLayout({
             box-shadow: 0 0 10px rgb(129, 212, 137), 0 0 5px rgb(129, 212, 137);
           }
         `}</style>
+        <link rel="preconnect" href="https://l58we0xe.apicdn.sanity.io" />
       </head>
       <body>
         <Providers>

@@ -32,12 +32,12 @@ export function StorySection() {
       <div className="w-full lg:w-[50%] flex flex-col gap-6 lg:gap-10 lg:mt-24">
         <StoryImage
           src={HeroOne}
-          alt="Kitchen preparation scene"
+          alt="Woman seated at a kitchen island enjoying a drink, surrounded by fresh produce and potted plants"
           className="h-[300px] lg:h-[35%]"
         />
         <StoryImage
           src={HeroThree}
-          alt="Cooking ingredients display"
+          alt="Tablet displaying a recipe beside kitchen utensils and ingredients on a counter"
           className="hidden lg:block h-[300px] lg:flex-grow"
         />
       </div>
@@ -45,7 +45,7 @@ export function StorySection() {
       <div className="w-full lg:w-[50%] flex flex-col">
         <StoryImage
           src={HeroTwo}
-          alt="Cooking process shot"
+          alt="Modern kitchen shelves with ceramic dishes, pots, and indoor plants arranged neatly"
           className="hidden lg:block h-[300px] lg:flex-grow"
         />
 

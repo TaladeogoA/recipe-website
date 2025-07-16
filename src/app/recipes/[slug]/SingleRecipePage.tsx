@@ -154,7 +154,7 @@ export default function SingleRecipePage({ recipe, slug }: SingleRecipePageProps
                                 <li className="flex gap-4 items-center">
                                     <Image
                                         src={ServingIcon}
-                                        alt=""
+                                        alt="Serving size icon"
                                         className="w-4 h-4 md:w-5 md:h-5"
                                     />
                                     <div className="flex items-center gap-2">
@@ -165,7 +165,7 @@ export default function SingleRecipePage({ recipe, slug }: SingleRecipePageProps
                                 <li className="flex gap-4 items-center">
                                     <Image
                                         src={PrepIcon}
-                                        alt=""
+                                        alt="Preparation time icon"
                                         className="w-4 h-4 md:w-5 md:h-5"
                                     />
                                     <div className="flex items-center gap-2">
@@ -176,7 +176,7 @@ export default function SingleRecipePage({ recipe, slug }: SingleRecipePageProps
                                 <li className="flex gap-4 items-center">
                                     <Image
                                         src={DifficultyIcon}
-                                        alt=""
+                                        alt="Difficulty level icon"
                                         className="w-4 h-4 md:w-5 md:h-5"
                                     />
                                     <div className="flex items-center gap-2">
